@@ -1,0 +1,70 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.contacts {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+  row-gap: 3rem;
+  background-color: $white;
+  &__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3rem;
+    width: 100%;
+    & h2 {
+      @include font(48px, 500);
+      color: $pale-text;
+    }
+    & p {
+      @include font(18px, 400);
+      color: $main-text;
+      max-width: 500px;
+      line-height: 150%;
+      text-align: center;
+    }
+  }
+  &__content {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__image {
+      width: 566px;
+      height: 566px;
+      background-size: cover;
+      background-position: center;
+      background-image: url("/contacts/contacts.jpg");
+    }
+    &__items {
+      display: flex;
+      flex-direction: column;
+      row-gap: 60px;
+      &__contact {
+        display: flex;
+        align-items: center;
+        column-gap: 20px;
+        & a {
+          color: $main-text;
+          @include font(22px, 600);
+        }
+        &__icon {
+          width: 70px;
+          height: 70px;
+          background-color: $pale-grey;
+          border-radius: 10px;
+          display: grid;
+          place-items: center;
+          & svg {
+            width: 40px;
+            height: 40px;
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+}

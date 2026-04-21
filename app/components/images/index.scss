@@ -1,0 +1,44 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.images-container {
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: $pale-white-3;
+  padding: {
+    top: 3rem;
+    bottom: 3rem;
+  };
+}
+.images {
+  width: 80%;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  height: 600px;
+}
+
+.item {
+  background-size: cover;
+  background-position: center;
+  &__1 {
+    background-image: url("/images/image-1.jpg");
+  }
+  &__2 {
+    background-image: url("/images/image-2.jpg");
+  }
+  &__3 {
+    background-image: url("/images/image-3.jpg");
+  }
+}
+
+.item:nth-child(1),
+.item:nth-child(2) {
+  flex-grow: 1;
+}
+
+.item:nth-child(3) {
+  width: 100%;
+}

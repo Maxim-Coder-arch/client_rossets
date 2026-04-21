@@ -1,0 +1,56 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.navigation {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 1001;
+}
+
+.menu {
+  width: 100%;
+  min-height: 80px;
+  background-color: rgba($pale-blue, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: solid 2px rgba($pale-text, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: {
+    left: 40px;
+    right: 40px;
+  };
+  &__logotype {
+    @include font(24px, 700);
+    color: $main-text;
+  }
+  &__content {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    &__items {
+      display: flex;
+      column-gap: 20px;
+      & a li {
+        @include font(16px, 500);
+        color: $pale-text;
+      }
+    }
+  }
+  &__target button {
+    background-color: $pale-text;
+    width: 150px;
+    height: 40px;
+    border-radius: 4px;
+    @include font(14px, 500);
+    color: $white;
+    cursor: pointer;
+  }
+  &__separator {
+    height: 30px;
+    width: 1px;
+    background-color: rgba($pale-text, 0.6);
+  }
+}
