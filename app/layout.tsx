@@ -1,5 +1,5 @@
 import Footer from "./components/footer/footer";
-import Menu from "./components/menu/menu";
+import LogicMenu from "./components/menu/logic";
 import "./global_styles/reset/reset.scss";
 import type { Metadata } from "next";
 
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Menu />
+        <LogicMenu />
         {children}
         <Footer />
       </body>

@@ -114,3 +114,162 @@
   width: 100%;
   height: 145px;
 }
+
+
+
+
+
+
+
+
+
+// ============================================
+// АДАПТИВ ДЛЯ HERO SECTION
+// ============================================
+
+/* Планшеты (768px - 1024px) */
+@media (max-width: 1024px) {
+  .hero-section {
+    max-height: none;
+    min-height: 100vh;
+  }
+
+  .hero-section__content {
+    padding-left: 40px;
+    max-width: 450px;
+  }
+
+  .hero-section__content__area h1 {
+    font-size: 36px;
+  }
+
+  .hero-section__content__area span {
+    font-size: 14px;
+  }
+
+  .hero-section__bottom-wrapper__points__item h2 {
+    font-size: 14px;
+  }
+
+  .hero-section__bottom-wrapper__points__item p {
+    font-size: 12px;
+  }
+}
+
+/* Телефоны горизонтально (576px - 768px) */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+  }
+
+  .template {
+    width: 100%;
+  }
+
+  .hero-section__content {
+    padding: 60px 30px 40px;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .hero-section__content__area {
+    align-items: center;
+  }
+
+  .hero-section__content__area h1 {
+    font-size: 32px;
+  }
+
+  .hero-section__content__area__target-actions {
+    justify-content: center;
+  }
+
+  .hero-section__image {
+    width: 100%;
+    height: 300px;
+  }
+
+  .hero-section__image__wrapper {
+    height: 100%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  .hero-section__bottom-wrapper {
+    position: static;
+    margin-top: -20px;
+    margin-bottom: 40px;
+    height: auto;
+  }
+
+  .hero-section__bottom-wrapper__points {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 25px 20px;
+    backdrop-filter: blur(10px);
+  }
+
+  .hero-section__bottom-wrapper__points__item {
+    width: calc(50% - 10px);
+  }
+
+  .hero-section__bottom-wrapper__points button {
+    margin-top: 10px;
+  }
+}
+
+/* Маленькие телефоны (до 576px) */
+@media (max-width: 576px) {
+  .hero-section__content {
+    padding: 60px 20px 30px;
+    &__area {
+      row-gap: 10px;
+    }
+  }
+
+  .hero-section__content__area h1 {
+    font-size: 28px;
+  }
+
+  .hero-section__content__area p {
+    font-size: 12px;
+  }
+
+  .hero-section__content__area span {
+    font-size: 13px;
+  }
+
+  .hero-section__content__area__target-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .hero-section__content__area__target-actions__look-catalog-up {
+    width: 100%;
+  }
+
+  .hero-section__image {
+    height: 250px;
+  }
+
+  .hero-section__bottom-wrapper__points {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-section__bottom-wrapper__points__item {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-section__bottom-wrapper__points button {
+    width: 100%;
+  }
+
+  .hero-section-footer {
+    height: 60px;
+  }
+}

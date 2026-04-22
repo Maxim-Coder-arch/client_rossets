@@ -13,44 +13,82 @@
     left: 50px;
     right: 50px;
   };
-  &__copyright {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    padding-top: 2rem;
-  }
+  
+  // небольшое улучшение для десктопа
   &__content {
     display: flex;
     width: 100%;
     justify-content: space-between;
     padding-bottom: 2rem;
     border-bottom: solid 1px #48628470;
+    
     &__target {
       display: flex;
       flex-direction: column;
       row-gap: 20px;
+      
       &__logotype {
         color: $main-text;
         @include font(32px, 600);
       }
+      
       &__text {
         max-width: 300px;
         color: $main-text;
         @include font(16px, 400);
       }
+      
       &__contacts {
         display: flex;
         column-gap: 30px;
+        
         &__contact {
           background-color: $white;
           padding: 7px;
           border-radius: 50%;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          &:hover {
+            transform: translateY(-3px);
+            background-color: $pale-text;
+            
+            svg {
+              color: $white;
+            }
+          }
+          
+          svg {
+            width: 24px;
+            height: 24px;
+            transition: color 0.2s ease;
+          }
         }
       }
     }
+    
     &__meta {
       display: flex;
       column-gap: 3rem;
+    }
+  }
+  
+  &__copyright {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-top: 2rem;
+    
+    a {
+      color: $main-text;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: $pale-text;
+      }
     }
   }
 }
@@ -59,13 +97,169 @@
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  
   &__title {
     @include font(20px, 400);
     color: $main-text;
   }
-  & ul {
+  
+  ul {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    
+    a {
+      text-decoration: none;
+      transition: all 0.2s ease;
+      
+      li {
+        list-style: none;
+        color: $second-text;
+        @include font(14px, 400);
+        transition: color 0.2s ease;
+      }
+      
+      &:hover li {
+        color: $pale-text;
+      }
+    }
+  }
+}
+
+// ============================================
+// АДАПТИВ ДЛЯ FOOTER
+// ============================================
+
+/* Планшеты (до 1024px) */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 0 30px;
+    margin-top: 4rem;
+  }
+  
+  .footer__content {
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .footer__content__target {
+    align-items: center;
+    text-align: center;
+  }
+  
+  .footer__content__target__text {
+    max-width: 400px;
+  }
+  
+  .footer__content__meta {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  
+  .footer__content__template {
+    min-width: 160px;
+  }
+}
+
+/* Телефоны горизонтально (до 768px) */
+@media (max-width: 768px) {
+  .footer {
+    padding: 0 20px;
+    margin-top: 3rem;
+    min-height: auto;
+    padding-top: 40px;
+    padding-bottom: 20px;
+  }
+  
+  .footer__content {
+    gap: 30px;
+  }
+  
+  .footer__content__target__logotype {
+    font-size: 28px;
+  }
+  
+  .footer__content__target__text {
+    font-size: 14px;
+    max-width: 100%;
+  }
+  
+  .footer__content__target__contacts {
+    gap: 20px;
+  }
+  
+  .footer__content__meta {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .footer__content__template {
+    text-align: center;
+  }
+  
+  .footer__content__template ul {
+    align-items: center;
+  }
+  
+  .footer__content__template ul a:hover li {
+    transform: translateX(0);
+  }
+  
+  .footer__copyright {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 12px;
+  }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+  .footer {
+    padding: 0 16px;
+    margin-top: 2rem;
+    padding-top: 30px;
+  }
+  
+  .footer__content {
+    gap: 25px;
+    padding-bottom: 25px;
+  }
+  
+  .footer__content__target__logotype {
+    font-size: 24px;
+  }
+  
+  .footer__content__target__text {
+    font-size: 13px;
+  }
+  
+  .footer__content__target__contacts {
+    gap: 15px;
+  }
+  
+  .footer__content__target__contacts__contact {
+    padding: 5px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .footer__content__template__title {
+    font-size: 18px;
+  }
+  
+  .footer__content__template ul li {
+    font-size: 12px;
+  }
+  
+  .footer__copyright {
+    font-size: 11px;
   }
 }

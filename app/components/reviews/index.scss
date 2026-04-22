@@ -6,20 +6,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 4rem;
-  row-gap: 3rem;
+  padding: 4rem 0;
   background-color: $white;
+  
   &__title {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 3rem;
+    row-gap: 1rem;
     width: 100%;
-    & h2 {
+    margin-bottom: 3rem;
+    
+    h2 {
       @include font(48px, 500);
       color: $pale-text;
+      text-align: center;
     }
-    & p {
+    
+    p {
       @include font(18px, 400);
       color: $main-text;
       max-width: 500px;
@@ -27,89 +31,267 @@
       text-align: center;
     }
   }
+  
+  &__slider-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  
   &__content {
-    display: flex;
-    justify-content: center;
-    column-gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    
     &__item {
-      height: 230px;
-      width: 400px;
       background-color: $card;
-      border-radius: 10px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+      
       &__header {
         display: flex;
         align-items: center;
-        column-gap: 20px;
-        margin-bottom: 20px;
-        position: relative;
-        &__name {
-          @include font(18px, 600);
-          color: $pale-text;
-        }
-        &__rating {
-          position: absolute;
-          right: 0;
-          @include font(20px, 600);
-          color: $pale-text;
-        }
+        gap: 12px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        
         &__image {
-          width: 40px;
-          height: 40px;
+          width: 48px;
+          height: 48px;
           border-radius: 50%;
-          background-color: #DDE0E4;
+          background-color: $pale-white;
           display: grid;
           place-items: center;
-          & svg {
-            width: 20px;
-            height: 20px;
-            color: $pale-white-2;
+          flex-shrink: 0;
+          
+          svg {
+            width: 24px;
+            height: 24px;
+            color: $pale-text;
           }
         }
+        
+        &__name {
+          @include font(16px, 600);
+          color: $pale-text;
+          flex: 1;
+        }
+        
+        &__rating {
+          @include font(14px, 500);
+          color: #FFB800;
+          letter-spacing: 2px;
+        }
       }
+      
       &__text {
-        @include font(16px, 400);
-        line-height: 30px;
-        color: $pale-text;
+        @include font(15px, 400);
+        line-height: 1.6;
+        color: $main-text;
       }
     }
   }
+  
   &__navigation {
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 3rem;
+    
     &__template {
       width: 80%;
+      max-width: 1200px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
+    
     &__dots {
       display: flex;
-      column-gap: 20px;
+      gap: 12px;
     }
+    
     &__dot {
-      width: 15px;
-      height: 15px;
-      background-color: #DDE0E4;
-      border-radius: 20px;
+      width: 10px;
+      height: 10px;
+      background-color: $pale-grey;
+      border-radius: 10px;
       cursor: pointer;
-      transition: all 0.3s ease-in-out;
+      transition: all 0.3s ease;
+      
+      &.active {
+        width: 28px;
+        background-color: $pale-text;
+      }
+      
+      &:hover {
+        background-color: $pale-text;
+      }
     }
+    
     &__buttons {
+      display: flex;
+      gap: 16px;
+      
       button {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: $pale-white;
         cursor: pointer;
-        & svg {
-          width: 30px;
-          height: 30px;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:hover {
+          background-color: $pale-text;
+          
+          svg {
+            color: $white;
+          }
+        }
+        
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+          
+          &:hover {
+            background-color: $pale-white;
+            
+            svg {
+              color: inherit;
+            }
+          }
+        }
+        
+        svg {
+          width: 20px;
+          height: 20px;
+          transition: color 0.2s ease;
         }
       }
     }
   }
 }
 
-.active {
-  width: 45px;
-  background-color: $pale-text;
+// ============================================
+// АДАПТИВ
+// ============================================
+
+/* Планшеты (до 1024px) */
+@media (max-width: 1024px) {
+  .reviews__content {
+    gap: 20px;
+    padding: 0 30px;
+  }
+  
+  .reviews__content__item {
+    padding: 20px;
+  }
+  
+  .reviews__navigation__template {
+    width: 90%;
+  }
+}
+
+/* Телефоны и маленькие планшеты (до 768px) */
+@media (max-width: 768px) {
+  .reviews {
+    padding: 3rem 0;
+  }
+  
+  .reviews__title h2 {
+    font-size: 36px;
+  }
+  
+  .reviews__title p {
+    font-size: 14px;
+    padding: 0 20px;
+  }
+  
+  .reviews__content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 0 20px;
+  }
+  
+  .reviews__content__item {
+    padding: 16px;
+  }
+  
+  .reviews__content__item__header__image {
+    width: 40px;
+    height: 40px;
+    
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  
+  .reviews__content__item__header__name {
+    font-size: 14px;
+  }
+  
+  .reviews__content__item__header__rating {
+    font-size: 12px;
+  }
+  
+  .reviews__content__item__text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  
+  .reviews__navigation__buttons button {
+    width: 38px;
+    height: 38px;
+  }
+}
+
+/* Маленькие телефоны (до 480px) */
+@media (max-width: 480px) {
+  .reviews {
+    padding: 2rem 0;
+  }
+  
+  .reviews__title h2 {
+    font-size: 28px;
+  }
+  
+  .reviews__title p {
+    font-size: 13px;
+  }
+  
+  .reviews__content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 16px;
+  }
+  
+  .reviews__content__item {
+    padding: 16px;
+  }
+  
+  .reviews__navigation__template {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .reviews__navigation__dots {
+    order: 2;
+  }
+  
+  .reviews__navigation__buttons {
+    order: 1;
+  }
 }
