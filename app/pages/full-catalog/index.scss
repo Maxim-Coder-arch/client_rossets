@@ -1,0 +1,15 @@
+
+.full-catalog {
+  padding-top: 100px;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  &__wrapper {
+    width: 100%;
+    max-width: 1900px;
+    padding: {
+      left: 30px;
+      right: 30px;
+    };
+  }
+}

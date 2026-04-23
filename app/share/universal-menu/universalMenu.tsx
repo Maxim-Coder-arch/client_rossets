@@ -1,25 +1,16 @@
+// universal-menu/universalMenu.tsx
 import "./index.scss";
 
-export const dataMenu =[
-  {
-    label: "Главная",
-    link: "/"
-  },
-  {
-    label: "Каталог",
-    link: "/"
-  },
-  {
-    label: "Преимущества",
-    link: "/"
-  },
-  {
-    label: "Контакты",
-    link: "/"
-  },
-]
+interface ILogicUniversalMenu {
+  label: string;
+  link: string;
+}
 
-const Menu = () => {
+interface UniversalMenuProps {
+  data: ILogicUniversalMenu[];
+}
+
+const UniversalMenu = ({ data }: UniversalMenuProps) => {
   return (
     <nav className="navigation">
       <div className="menu">
@@ -28,12 +19,12 @@ const Menu = () => {
         </div>
         <div className="menu__content">
           <ul className="menu__content__items">
-            {dataMenu.map((item, index) => {
+            {data.map((item, index) => {
               return (
                 <a className="menu__item" key={index} href={item.link}>
                   <li>{item.label}</li>
                 </a>
-              )
+              );
             })}
           </ul>
           <div className="menu__separator"></div>
@@ -43,7 +34,7 @@ const Menu = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Menu;
+export default UniversalMenu;

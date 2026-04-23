@@ -1,0 +1,120 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.rosset-card {
+  background-color: $white;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  
+  &:hover {
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    
+    .rosset-card__image img {
+      transform: scale(1.05);
+    }
+  }
+  
+  &__image {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    overflow: hidden;
+    background-color: $pale-white-3;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+  }
+  
+  &__meta {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    
+    &__description {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      
+      p {
+        @include font(14px, 400);
+        color: $second-text;
+        display: flex;
+        align-items: baseline;
+        
+        &::before {
+          content: "•";
+          color: $pale-text;
+          margin-right: 8px;
+          font-weight: bold;
+        }
+        
+        &:last-of-type {
+          margin-top: 4px;
+          font-weight: 600;
+          color: $main-text;
+          
+          &::before {
+            content: "₽";
+            color: $pale-text;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+    
+    &__footer {
+      margin-top: auto;
+      padding-top: 8px;
+      
+      a {
+        display: inline-block;
+        width: 100%;
+        text-align: center;
+        background-color: $pale-text;
+        color: $white;
+        @include font(14px, 500);
+        padding: 12px 20px;
+        border-radius: 30px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: darken($pale-text, 10%);
+          transform: translateY(-2px);
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .rosset-card {
+    &__meta {
+      padding: 16px;
+      
+      &__description p {
+        font-size: 12px;
+      }
+    }
+    
+    &__meta__footer a {
+      padding: 10px 16px;
+      font-size: 13px;
+    }
+  }
+}

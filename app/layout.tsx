@@ -1,7 +1,7 @@
 import Footer from "./components/footer/footer";
-import LogicMenu from "./components/menu/logic";
 import "./global_styles/reset/reset.scss";
 import type { Metadata } from "next";
+import LoaderComponent from "./share/loader/loader";
 
 
 export const metadata: Metadata = {
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <LogicMenu />
+        <LoaderComponent />
         {children}
         <Footer />
       </body>

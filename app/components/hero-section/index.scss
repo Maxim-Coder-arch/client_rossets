@@ -50,6 +50,8 @@
           width: 150px;
           height: 40px;
           border-radius: 4px;
+          display: grid;
+          place-items: center;
           @include font(14px, 500);
           color: $main-text;
           cursor: pointer;

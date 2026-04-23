@@ -1,0 +1,255 @@
+@use "../../../global_styles/colors/colors.scss" as *;
+@use "../../../global_styles/mixins/mixins.scss" as *;
+
+.product-page {
+  padding: 3rem 2rem;
+  padding-top: 100px;
+  background-color: $white;
+  
+  &__container {
+    max-width: 1900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+  
+  &__gallery {
+    &__main {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      background-color: $pale-white-3;
+      border-radius: 24px;
+      overflow: hidden;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 20px;
+      }
+    }
+    
+    &__thumbs {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+      
+      &__item {
+        width: 80px;
+        height: 80px;
+        background-color: $pale-white-3;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+        
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          padding: 8px;
+        }
+        
+        &:hover {
+          border-color: rgba($pale-text, 0.5);
+        }
+        
+        &.active {
+          border-color: $pale-text;
+          box-shadow: 0 0 0 2px rgba($pale-text, 0.2);
+        }
+      }
+    }
+  }
+  
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    
+    &__header {
+      border-bottom: 1px solid rgba($pale-text, 0.2);
+      padding-bottom: 16px;
+      
+      h1 {
+        @include font(32px, 700);
+        color: $main-text;
+        margin-bottom: 8px;
+      }
+      
+      .series-name {
+        @include font(16px, 400);
+        color: $pale-text;
+      }
+    }
+    
+    &__characteristics,
+    &__comment {
+      h2 {
+        @include font(18px, 600);
+        color: $main-text;
+        margin-bottom: 12px;
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1px solid rgba($second-text, 0.1);
+          
+          span {
+            @include font(14px, 400);
+            color: $second-text;
+          }
+          
+          strong {
+            @include font(16px, 600);
+            color: $main-text;
+          }
+        }
+      }
+    }
+    
+    &__comment p {
+      @include font(14px, 400);
+      color: $second-text;
+      line-height: 1.6;
+      background-color: $pale-white-3;
+      padding: 16px;
+      border-radius: 12px;
+    }
+    
+    &__price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 16px;
+      border-top: 1px solid rgba($pale-text, 0.2);
+      margin-top: 8px;
+      
+      .price {
+        @include font(36px, 700);
+        color: $pale-text;
+        
+        &::after {
+          content: " ₽";
+          @include font(18px, 400);
+          color: $second-text;
+        }
+      }
+      
+      .order-button {
+        background-color: $pale-text;
+        color: $white;
+        @include font(16px, 600);
+        padding: 14px 32px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          background-color: darken($pale-text, 10%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba($pale-text, 0.3);
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+    
+    &__back {
+      margin-top: 8px;
+      
+      a {
+        @include font(14px, 400);
+        color: $second-text;
+        text-decoration: none;
+        transition: color 0.2s ease;
+        
+        &:hover {
+          color: $pale-text;
+        }
+      }
+    }
+  }
+}
+
+.product-not-found {
+  text-align: center;
+  padding: 4rem;
+  
+  h1 {
+    @include font(24px, 600);
+    color: $main-text;
+    margin-bottom: 1rem;
+  }
+  
+  a {
+    color: $pale-text;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// Адаптив для маленьких телефонов
+@media (max-width: 480px) {
+  .product-page {
+    padding: 1.5rem;
+    
+    &__info__price {
+      flex-direction: column;
+      
+      .order-button {
+        width: 100%;
+      }
+    }
+    
+    &__gallery__thumbs__item {
+      width: 60px;
+      height: 60px;
+    }
+  }
+}
+
+.other-series {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  &__wrapper {
+    max-width: 1900px;
+    width: 100%;
+    padding: {
+      left: 30px;
+      right: 30px;
+    };
+    & h5 {
+      @include font(24px, 600);
+      color: $main-text;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: solid 1px rgba($pale-text, 0.3);
+    }
+  }
+}

@@ -1,0 +1,236 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.bid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 50px;
+  gap: 60px;
+  background-color: $white;
+  
+  @media (max-width: 1024px) {
+    flex-direction: column;
+    padding: 3rem 30px;
+    gap: 40px;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 2rem 20px;
+    gap: 30px;
+  }
+  
+  &__label {
+    flex: 1;
+    
+    &__content {
+      max-width: 400px;
+      
+      @media (max-width: 1024px) {
+        max-width: 100%;
+        text-align: center;
+      }
+      
+      h2 {
+        @include font(36px, 600);
+        color: $main-text;
+        margin-bottom: 16px;
+        text-align: center;
+        
+        @media (max-width: 768px) {
+          font-size: 28px;
+        }
+        
+        @media (max-width: 480px) {
+          font-size: 24px;
+        }
+      }
+      
+      p {
+        text-align: center;
+        @include font(16px, 400);
+        color: $second-text;
+        line-height: 1.5;
+        margin-bottom: 24px;
+        
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+      }
+      
+      &__choice {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        @include font(14px, 400);
+        color: $second-text;
+        margin-bottom: 24px;
+        
+        @media (max-width: 480px) {
+          gap: 12px;
+          font-size: 12px;
+        }
+        
+        &__block {
+          width: 40px;
+          height: 1px;
+          background-color: rgba($second-text, 0.3);
+          
+          @media (max-width: 480px) {
+            width: 30px;
+          }
+        }
+      }
+      
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        text-decoration: none;
+        @include font(16px, 500);
+        transition: all 0.2s ease;
+        padding: 12px 0;
+        border-radius: 10px;
+        
+        @media (max-width: 768px) {
+          justify-content: center;
+        }
+        
+        &:first-of-type {
+          color: $main-text;
+          
+          &:hover {
+            color: $pale-text;
+            transform: translateX(5px);
+          }
+        }
+        
+        &:last-of-type {
+          color: $pale-text;
+          
+          &:hover {
+            color: darken($pale-text, 15%);
+            transform: translateX(5px);
+          }
+        }
+      }
+    }
+  }
+  
+  &__form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: $pale-white-3;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    
+    @media (max-width: 768px) {
+      padding: 30px 20px;
+      gap: 16px;
+    }
+    
+    @media (max-width: 480px) {
+      padding: 24px 16px;
+    }
+    
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid rgba($pale-text, 0.2);
+      border-radius: 12px;
+      @include font(14px, 400);
+      color: $main-text;
+      background-color: $white;
+      transition: all 0.2s ease;
+      outline: none;
+      
+      &:focus {
+        border-color: $pale-text;
+        box-shadow: 0 0 0 3px rgba($pale-text, 0.1);
+      }
+      
+      &::placeholder {
+        color: rgba($second-text, 0.6);
+      }
+      
+      &:hover {
+        border-color: rgba($pale-text, 0.4);
+      }
+    }
+    
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+      font-family: inherit;
+      
+      @media (max-width: 768px) {
+        min-height: 100px;
+      }
+    }
+    
+    &__checkbox {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px 0;
+      
+      @media (max-width: 480px) {
+        align-items: flex-start;
+      }
+      
+      input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        flex-shrink: 0;
+        accent-color: $pale-text;
+        
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      
+      label {
+        @include font(12px, 400);
+        color: $second-text;
+        cursor: pointer;
+        line-height: 1.4;
+        
+        &:hover {
+          color: $main-text;
+        }
+      }
+    }
+    
+    button {
+      background-color: $pale-text;
+      color: $white;
+      @include font(16px, 500);
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-top: 8px;
+      
+      &:hover {
+        background-color: darken($pale-text, 10%);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba($pale-text, 0.3);
+      }
+      
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}

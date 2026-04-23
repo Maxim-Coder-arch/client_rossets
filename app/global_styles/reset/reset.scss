@@ -15,13 +15,14 @@ body {
   scroll-behavior: smooth;
   background-color: $main-bg;
 }
-main {
+.root-content {
   width: 100vw;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow-x: hidden;
+  justify-content: center;
+}
+main {
+  width: 100%;
+  max-width: 1900px;
 }
 
 
