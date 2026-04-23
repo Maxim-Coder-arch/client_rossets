@@ -10,13 +10,13 @@ html,
 body {
   margin: 0; 
   width: 100%;
-  min-height: fit-content; 
+  min-height: 100vh; 
   overflow-x: hidden;
   scroll-behavior: smooth;
   background-color: $main-bg;
 }
 .root-content {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 }

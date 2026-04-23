@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { seriesData } from "@/data/series.data";
 import "./index.scss";
 import SeriesCard from "@/app/share/series-card/seriesCard";
