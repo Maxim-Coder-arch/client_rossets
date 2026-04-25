@@ -2,6 +2,7 @@ import Footer from "./components/footer/footer";
 import "./global_styles/reset/reset.scss";
 import type { Metadata } from "next";
 import LoaderComponent from "./share/loader/loader";
+import { Tracker } from "./share/tracker/tracker";
 
 
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({
         <LoaderComponent />
         {children}
         <Footer />
+        <Tracker />
       </body>
     </html>
   );

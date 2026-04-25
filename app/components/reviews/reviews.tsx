@@ -6,59 +6,37 @@ import ArrowLeftIcon from "@/public/icons/arrowLeft";
 import ArrowRightIcon from "@/public/icons/arrowRight";
 import "./index.scss";
 
-const allReviews = [
-  {
-    name: "Анна",
-    text: `"Любимая розетка в серии «Енисей». Легко и просто в духе. Не требует особого усилия и не занимает много места."`,
-    rating: 5
-  },
-  {
-    name: "Дмитрий",
-    text: `"Заказывали розетки для выставки собак. Всё сделали в срок, качество отличное. Отдельное спасибо за помощь с дизайном!"`,
-    rating: 5
-  },
-  {
-    name: "Елена",
-    text: `"Срочный заказ за 5 дней — реально! Спасли наше мероприятие. Розетки выглядят дорого и престижно."`,
-    rating: 5
-  },
-  {
-    name: "Михаил",
-    text: `"Большой выбор цветов ленты. Сделали индивидуальные серединки с логотипом. Клиенты довольны."`,
-    rating: 4
-  },
-  {
-    name: "Ольга",
-    text: `"Отличное качество. Розетки плотные, лента не сыпется. Заказывали 200 штук — получили скидку. Рекомендую!"`,
-    rating: 5
-  },
-  {
-    name: "Сергей",
-    text: `"Уже третий раз заказываю. Всегда в срок, цвета точно как на фото. Удобно, что можно скачать полный каталог PDF."`,
-    rating: 5
-  },
-  {
-    name: "Татьяна",
-    text: `"Детская серия «Котик» — хит! Дети в восторге. Спасибо за качество и внимание к деталям."`,
-    rating: 5
-  },
-  {
-    name: "Анна",
-    text: `"Любимая розетка в серии «Енисей». Легко и просто в духе. Не требует особого усилия и не занимает много места."`,
-    rating: 5
-  },
-  {
-    name: "Дмитрий",
-    text: `"Заказывали розетки для выставки собак. Всё сделали в срок, качество отличное."`,
-    rating: 5
-  },
-];
+interface IReview {
+  _id: string;
+  name: string;
+  text: string;
+  rating: number;
+  createdAt: string;
+}
 
 const Reviews = () => {
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
   const [reviewsPerView, setReviewsPerView] = useState(3);
+  
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const response = await fetch("/api/reviews");
+        const data = await response.json();
+        setReviews(data);
+      } catch (error) {
+        console.error("Ошибка загрузки отзывов:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchReviews();
+  }, []);
   
   useEffect(() => {
     const handleResize = () => {
@@ -74,9 +52,41 @@ const Reviews = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   
-  const totalPages = Math.ceil(allReviews.length / reviewsPerView);
+  useEffect(() => {
+    setCurrentIndex(0);
+  }, [reviewsPerView]);
+  
+  if (loading) {
+    return (
+      <section id="reviews">
+        <div className="reviews">
+          <div className="reviews__title">
+            <h2>Отзывы</h2>
+            <p>Нас рекомендуют</p>
+          </div>
+        </div>
+        <div className="reviews__loading">Загрузка отзывов...</div>
+      </section>
+    );
+  }
+  
+  if (reviews.length === 0) {
+    return (
+      <section id="reviews">
+        <div className="reviews">
+          <div className="reviews__title">
+            <h2>Отзывы</h2>
+            <p>Нас рекомендуют</p>
+          </div>
+        </div>
+        <div className="reviews__empty">Пока нет отзывов. Будьте первым!</div>
+      </section>
+    );
+  }
+  
+  const totalPages = Math.ceil(reviews.length / reviewsPerView);
   const startIndex = currentIndex * reviewsPerView;
-  const currentReviews = allReviews.slice(startIndex, startIndex + reviewsPerView);
+  const currentReviews = reviews.slice(startIndex, startIndex + reviewsPerView);
   
   const goToNext = () => {
     if (currentIndex < totalPages - 1) {
@@ -138,7 +148,7 @@ const Reviews = () => {
       >
         <div className="reviews__content">
           {currentReviews.map((review, index) => (
-            <div className="reviews__content__item" key={`${startIndex + index}`}>
+            <div className="reviews__content__item" key={review._id}>
               <div className="reviews__content__item__header">
                 <div className="reviews__content__item__header__image">
                   <UserIcon />
@@ -155,35 +165,37 @@ const Reviews = () => {
         </div>
       </div>
       
-      <div className="reviews__navigation">
-        <div className="reviews__navigation__template">
-          <div className="reviews__navigation__dots">
-            {Array.from({ length: totalPages }).map((_, idx) => (
-              <div
-                key={idx}
-                className={`reviews__navigation__dot ${currentIndex === idx ? "active" : ""}`}
-                onClick={() => goToPage(idx)}
-              />
-            ))}
-          </div>
-          <div className="reviews__navigation__buttons">
-            <button 
-              className="reviews__navigation__prev" 
-              onClick={goToPrev}
-              disabled={currentIndex === 0}
-            >
-              <ArrowLeftIcon />
-            </button>
-            <button 
-              className="reviews__navigation__next" 
-              onClick={goToNext}
-              disabled={currentIndex === totalPages - 1}
-            >
-              <ArrowRightIcon />
-            </button>
+      {totalPages > 1 && (
+        <div className="reviews__navigation">
+          <div className="reviews__navigation__template">
+            <div className="reviews__navigation__dots">
+              {Array.from({ length: totalPages }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`reviews__navigation__dot ${currentIndex === idx ? "active" : ""}`}
+                  onClick={() => goToPage(idx)}
+                />
+              ))}
+            </div>
+            <div className="reviews__navigation__buttons">
+              <button 
+                className="reviews__navigation__prev" 
+                onClick={goToPrev}
+                disabled={currentIndex === 0}
+              >
+                <ArrowLeftIcon />
+              </button>
+              <button 
+                className="reviews__navigation__next" 
+                onClick={goToNext}
+                disabled={currentIndex === totalPages - 1}
+              >
+                <ArrowRightIcon />
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 };

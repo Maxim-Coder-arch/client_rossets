@@ -1,8 +1,7 @@
 'use client';
 
 import { useParams } from "next/navigation";
-import { useState } from "react";
-import { rossets } from "@/data/rossets.data";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { seriesData } from "@/data/series.data";
@@ -10,41 +9,94 @@ import "./index.scss";
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import SeriesCard from "@/app/share/series-card/seriesCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
+import ModalOrderProduct from "@/app/share/modal-order-products/modalOrderProduct";
 
-const Product = () => {
+interface IProduct {
+  _id: string;
+  image: string;
+  additionalImages: string[];
+  seriesId: string;
+  seriesNumber: string;
+  rossetSeries: string;
+  rossetNumber: number;
+  rossetDiameter: number;
+  numberOfTails: number;
+  tailLength: number;
+  comment: string;
+  price: number;
+}
+
+const ProductPage = () => {
   const params = useParams();
-  const product = rossets.find(item => item._id === params.id);
+  const [product, setProduct] = useState<IProduct | null>(null);
   const [selectedImage, setSelectedImage] = useState(0);
-  
-  if (!product) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [isOpenModalOrderProducts, setIsOpenModalOrderProducts] = useState(false);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/products/${params.id}`);
+        
+        if (!res.ok) {
+          throw new Error("Розетка не найдена");
+        }
+        
+        const data = await res.json();
+        setProduct(data);
+      } catch (err) {
+        console.error("Ошибка загрузки:", err);
+        setError(err instanceof Error ? err.message : "Ошибка загрузки");
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (params.id) {
+      fetchProduct();
+    }
+  }, [params.id]);
+
+  if (loading) {
     return (
-      <div className="product-not-found">
-        <h1>Розетка не найдена</h1>
-        <Link href="/catalog">Вернуться в каталог</Link>
-      </div>
+      <>
+        <LogicUniversalMenu data={[{ label: "Главная", link: "/" }, { label: "Контакты", link: "#contacts" }]} />
+        <div className="product-page">
+          <div className="product-page__container">
+            <div className="loading-spinner">Загрузка...</div>
+          </div>
+        </div>
+      </>
     );
   }
+
+  if (error || !product) {
+    return (
+      <>
+        <LogicUniversalMenu data={[{ label: "Главная", link: "/" }, { label: "Контакты", link: "#contacts" }]} />
+        <div className="product-not-found">
+          <h1>{error || "Розетка не найдена"}</h1>
+          <Link href="/pages/full-catalog">Вернуться в каталог</Link>
+        </div>
+      </>
+    );
+  }
+
   const allImages = [product.image, ...(product.additionalImages || [])];
   const hasMultipleImages = allImages.length > 1;
   const otherSeries = seriesData.filter(series => series._id !== product.seriesId);
+  
   const dataLogicMenu = [
-    {
-      label: "Главная",
-      link: "/"
-    },
-    {
-      label: "Вернуться к серии",
-      link: `/pages/series/${product.seriesId}`
-    },
-    {
-      label: "Контакты",
-      link: "#contacts"
-    }
-  ]
+    { label: "Главная", link: "/" },
+    { label: "Вернуться к серии", link: `/pages/series/${product.seriesId}` },
+    { label: "Контакты", link: "#contacts" }
+  ];
   
   return (
     <>
-    <LogicUniversalMenu data={dataLogicMenu} />
+      <LogicUniversalMenu data={dataLogicMenu} />
       <div className="product-page">
         <div className="product-page__container">
           <div className="product-page__gallery">
@@ -58,7 +110,6 @@ const Product = () => {
               />
             </div>
             
-
             {hasMultipleImages && (
               <div className="product-page__gallery__thumbs">
                 {allImages.map((img, idx) => (
@@ -79,7 +130,6 @@ const Product = () => {
             )}
           </div>
           
-
           <div className="product-page__info">
             <div className="product-page__info__header">
               <h1>{product.seriesNumber}</h1>
@@ -117,24 +167,28 @@ const Product = () => {
             
             <div className="product-page__info__price">
               <div className="price">{product.price} ₽</div>
-              <button className="order-button">Заказать</button>
+              <button className="order-button" onClick={() => setIsOpenModalOrderProducts(true)}>Заказать</button>
             </div>
-            
           </div>
         </div>
       </div>
+      
       <div className="other-series">
         <div className="other-series__wrapper">
           <h5>Смотрите также</h5>
           <TemplateCards>
-            {otherSeries.map((other, index) => {
-              return <SeriesCard product={other} key={index} />
-            })}
+            {otherSeries.map((other) => (
+              <SeriesCard product={other} key={other._id} />
+            ))}
           </TemplateCards>
         </div>
       </div>
+      {isOpenModalOrderProducts && <ModalOrderProduct
+        product={product} 
+        onClose={() => setIsOpenModalOrderProducts(false)} 
+      />}
     </>
   );
 };
 
-export default Product;
+export default ProductPage;
