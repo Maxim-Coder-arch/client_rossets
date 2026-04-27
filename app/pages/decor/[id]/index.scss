@@ -1,0 +1,223 @@
+@use "../../../global_styles/colors/colors.scss" as *;
+@use "../../../global_styles/mixins/mixins.scss" as *;
+
+.decor-page {
+  min-height: calc(100vh - 200px);
+  padding: 3rem 2rem;
+  background-color: $white;
+  padding-top: 100px;
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+  }
+
+  &__loading,
+  &__error {
+    text-align: center;
+    padding: 4rem 2rem;
+    
+    h1 {
+      @include font(24px, 600);
+      color: $main-text;
+      margin-bottom: 1rem;
+    }
+    
+    a {
+      color: $pale-text;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+
+  // =====================
+  // GALLERY
+  // =====================
+  &__gallery {
+    &__main {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      background-color: $pale-white-3;
+      border-radius: 20px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 20px;
+      }
+    }
+
+    &__thumbs {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+
+      &__item {
+        width: 80px;
+        height: 80px;
+        background-color: $pale-white-3;
+        border-radius: 12px;
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s ease;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          padding: 8px;
+        }
+
+        &:hover {
+          border-color: rgba($pale-text, 0.5);
+        }
+
+        &.active {
+          border-color: $pale-text;
+          box-shadow: 0 0 0 2px rgba($pale-text, 0.2);
+        }
+      }
+    }
+  }
+
+  // =====================
+  // INFO
+  // =====================
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    &__header {
+      border-bottom: 1px solid rgba($pale-text, 0.2);
+      padding-bottom: 20px;
+
+      h1 {
+        @include font(32px, 700);
+        color: $main-text;
+        margin-bottom: 12px;
+
+        @media (max-width: 768px) {
+          font-size: 28px;
+        }
+      }
+
+      &__price {
+        @include font(28px, 700);
+        color: $pale-text;
+
+        span {
+          @include font(14px, 400);
+          color: $second-text;
+        }
+      }
+    }
+
+    &__description {
+      h2 {
+        @include font(18px, 600);
+        color: $main-text;
+        margin-bottom: 12px;
+      }
+
+      p {
+        @include font(15px, 400);
+        color: $second-text;
+        line-height: 1.6;
+      }
+    }
+
+    &__fields {
+      h2 {
+        @include font(18px, 600);
+        color: $main-text;
+        margin-bottom: 12px;
+      }
+
+      .fields-list {
+        list-style: none;
+        padding: 0;
+        background-color: $pale-white-3;
+        border-radius: 16px;
+        overflow: hidden;
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 16px;
+          border-bottom: 1px solid rgba($pale-text, 0.1);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .field-label {
+            @include font(14px, 500);
+            color: $main-text;
+          }
+
+          .field-value {
+            @include font(14px, 400);
+            color: $pale-text;
+          }
+        }
+      }
+    }
+
+    &__actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 16px;
+
+      .order-button {
+        background-color: $pale-text;
+        color: $white;
+        @include font(18px, 600);
+        padding: 14px 24px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: darken($pale-text, 10%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba($pale-text, 0.3);
+        }
+      }
+
+      .back-link {
+        text-align: center;
+        @include font(14px, 400);
+        color: $second-text;
+        text-decoration: none;
+        transition: color 0.2s;
+
+        &:hover {
+          color: $pale-text;
+        }
+      }
+    }
+  }
+}

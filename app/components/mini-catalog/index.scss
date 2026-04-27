@@ -139,11 +139,12 @@
   }
   
   @media (max-width: 768px) {
-    flex: 0 1 calc(50% - 24px);
+    flex: 0 1 calc(50% - 12px);  // ← 2 колонки на планшете
+    min-width: auto;
   }
   
   @media (max-width: 480px) {
-    flex: 0 1 100%;
+    flex: 0 1 calc(50% - 12px);  // ← 2 колонки на телефоне
   }
   
   &__image {

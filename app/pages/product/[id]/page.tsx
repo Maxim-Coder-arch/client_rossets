@@ -33,6 +33,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isOpenModalOrderProducts, setIsOpenModalOrderProducts] = useState(false);
+  const [series, setSeries] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -58,6 +59,20 @@ const ProductPage = () => {
       fetchProduct();
     }
   }, [params.id]);
+
+  useEffect(() => {
+    const fetchSeries = async () => {
+      try {
+        const res = await fetch("/api/series");
+        const data = await res.json();
+        setSeries(data.series || []);
+      } catch (err) {
+        console.error("Ошибка загрузки серий:", err);
+      }
+    };
+
+    fetchSeries();
+  }, []);
 
   if (loading) {
     return (
@@ -86,7 +101,9 @@ const ProductPage = () => {
 
   const allImages = [product.image, ...(product.additionalImages || [])];
   const hasMultipleImages = allImages.length > 1;
-  const otherSeries = seriesData.filter(series => series._id !== product.seriesId);
+  const otherSeries = series.filter(
+    (s) => String(s.seriesId) !== String(product.seriesId)
+  );
   
   const dataLogicMenu = [
     { label: "Главная", link: "/" },

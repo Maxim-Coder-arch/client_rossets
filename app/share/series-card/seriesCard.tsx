@@ -15,7 +15,7 @@ const SeriesCard = ({ product }) => {
       </div>
       <div className="series-card__content">
         <h3 className="series-card__title">{product.seriesTitle}</h3>
-        <Link href={`/pages/series/${product._id}`} className="series-card__link">
+        <Link href={`/pages/series/${product.seriesId}`} className="series-card__link">
           Подробнее
         </Link>
       </div>
