@@ -6,6 +6,8 @@ import RossetCard from "@/app/share/rossetCard/rossetCard";
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import Image from "next/image";
+import { ISeries } from "@/types/series.type";
+import { IProduct } from "@/types/product.type";
 import "./index.scss";
 
 const dataLogicMenu = [
@@ -18,8 +20,8 @@ const Product = () => {
   const params = useParams();
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [series, setSeries] = useState([]);
-  const [seriesFilterData, setSeriesFilterData] = useState([]);
+  const [series, setSeries] = useState<ISeries[]>([]);
+  const [seriesFilterData, setSeriesFilterData] = useState<ISeries | null>(null);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -54,7 +56,7 @@ const Product = () => {
         setSeries(seriesData);
 
         const currentSeries = seriesData.series.find(
-          (item: any) => item.seriesId === params.id
+          (item: ISeries) => item.seriesId === params.id
         );
 
         setSeriesFilterData(currentSeries);
@@ -70,6 +72,12 @@ const Product = () => {
       fetchAll();
     }
   }, [params.id]);
+
+  if (!seriesFilterData) {
+    return (
+      <h1>Серия не найдена</h1>
+    )
+  }
 
 
   return (
@@ -90,7 +98,7 @@ const Product = () => {
             <div className="empty-series">В этой серии пока нет розеток</div>
           ) : (
             <TemplateCards>
-              {products.map((product: any) => (
+              {products.map((product: IProduct) => (
                 <RossetCard key={product._id} {...product} />
               ))}
             </TemplateCards>

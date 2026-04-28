@@ -13,13 +13,16 @@ const LoaderComponent = () => {
 
   useEffect(() => {
     setIsLoading(true);
+  }, [pathname]);
+  useEffect(() => {
+    if (!isLoading) return;
     
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [pathname]);
+  }, [isLoading]);
 
   return (
     <AnimatePresence>

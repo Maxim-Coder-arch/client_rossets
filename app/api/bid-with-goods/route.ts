@@ -6,7 +6,6 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { name, contact, socialLink, comment, product } = body;
 
-    // Валидация
     if (!name || !name.trim()) {
       return NextResponse.json(
         { error: "Имя обязательно" },

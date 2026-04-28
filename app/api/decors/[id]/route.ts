@@ -2,7 +2,6 @@ import { getCollection } from "@/lib/mongodb/db";
 import { NextResponse } from "next/server";
 import { ObjectId } from "mongodb";
 
-// GET /api/decors/[id] — получить один декор по ID
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }

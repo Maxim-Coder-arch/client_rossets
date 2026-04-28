@@ -2,24 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { IDecor } from "@/types/decor.type";
 import "./index.scss";
-
-interface IAdditionalField {
-  id: number;
-  label: string;
-  value: string;
-}
-
-interface IDecor {
-  _id: string;
-  title: string;
-  description: string;
-  price: number;
-  mainImage: string;
-  additionalImages: string[];
-  additionalFields: IAdditionalField[];
-  createdAt: string;
-}
 
 interface ModalOrderDecorProps {
   product: IDecor;

@@ -2,22 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { IProduct } from "@/types/product.type";
 import "./index.scss";
-
-interface IProduct {
-  _id: string;
-  image: string;
-  additionalImages: string[];
-  seriesId: string;
-  seriesNumber: string;
-  rossetSeries: string;
-  rossetNumber: number;
-  rossetDiameter: number;
-  numberOfTails: number;
-  tailLength: number;
-  comment: string;
-  price: number;
-}
 
 interface ModalOrderProductProps {
   product: IProduct;

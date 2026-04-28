@@ -1,9 +1,9 @@
 'use client';
 
-import { dataMenu } from "./menu";
-import "./index.scss";
+import { dataMenu } from "@/data/menu.data";
 import Link from "next/link";
 import { useState } from "react";
+import "./index.scss";
 
 const MobileMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

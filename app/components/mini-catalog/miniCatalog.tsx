@@ -1,43 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
+import { ISeries } from "@/types/series.type";
 import "./index.scss";
-import DecorCard from "@/app/share/decorCard/decorCard";
-
-const SeriesCard = ({ product }: { product: any }) => {
-  return (
-    <div className="series-card">
-      <div className="series-card__image">
-        <Image
-          src={product.image || "/placeholder.jpg"}
-          alt={product.seriesTitle}
-          width={400}
-          height={400}
-        />
-      </div>
-
-      <div className="series-card__content">
-        <h3 className="series-card__title">{product.seriesTitle}</h3>
-
-        <Link
-          href={`/pages/series/${product.seriesId}`}
-          className="series-card__link"
-        >
-          Подробнее
-        </Link>
-      </div>
-    </div>
-  );
-};
+import { IDecor } from "@/types/decor.type";
+import MiniCatalogUi from "@/app/features/mini-catalog-ui";
 
 const MiniCatalog = () => {
-  const [activeCategory, setActiveCategory] =
-    useState<"ready" | "decor">("ready");
-
-  const [series, setSeries] = useState<any[]>([]);
-  const [decorsData, setDecorsData] = useState<any[]>([]);
+  const [activeCategory, setActiveCategory] = useState<"ready" | "decor">("ready");
+  const [series, setSeries] = useState<ISeries[]>([]);
+  const [decorsData, setDecorsData] = useState<IDecor[]>([]);
 
   useEffect(() => {
     const fetchSeries = async () => {
@@ -50,10 +22,8 @@ const MiniCatalog = () => {
         console.error("Ошибка загрузки серий:", err);
       }
     };
-
     fetchSeries();
   }, []);
-
   useEffect(() => {
     const fetchDecors = async () => {
       try {
@@ -65,63 +35,15 @@ const MiniCatalog = () => {
         console.error("Ошибка загрузки декоров:", err);
       }
     };
-
     fetchDecors();
   }, []);
-
   const data = series.slice(0, 8);
 
-  return (
-    <section className="mini-catalog-section">
-      <div className="mini-catalog">
-        <div className="mini-catalog__header">
-          <h2 className="mini-catalog__title">Каталог</h2>
-          <p className="mini-catalog__subtitle">
-            Заказывают чаще всего
-          </p>
-
-          <Link
-            href="/pages/full-catalog"
-            className="mini-catalog__link-all"
-          >
-            Смотреть полный каталог →
-          </Link>
-        </div>
-
-        <div className="mini-catalog__tabs">
-          <button
-            className={`mini-catalog__tab ${
-              activeCategory === "ready" ? "active" : ""
-            }`}
-            onClick={() => setActiveCategory("ready")}
-          >
-            Серии
-          </button>
-
-          <button
-            className={`mini-catalog__tab ${
-              activeCategory === "decor" ? "active" : ""
-            }`}
-            onClick={() => setActiveCategory("decor")}
-          >
-            Декоры
-          </button>
-        </div>
-
-        <div className="mini-catalog__grid">
-          {activeCategory === "ready" &&
-            data.map((item) => (
-              <SeriesCard product={item} key={item._id} />
-            ))}
-
-          {activeCategory === "decor" &&
-            decorsData.map((item) => (
-              <DecorCard decor={item} key={item._id} />
-            ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <MiniCatalogUi 
+  seriesData={data} 
+  decorsData={decorsData} 
+  activeCategory={activeCategory} 
+  setActiveCategory={setActiveCategory} />
 };
 
 export default MiniCatalog;

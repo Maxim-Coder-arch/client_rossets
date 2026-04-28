@@ -5,26 +5,10 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "./index.scss";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import ModalOrderDecor from "@/app/share/modal-order-decor/modalOrderDecor";
-
-interface IAdditionalField {
-  id: number;
-  label: string;
-  value: string;
-}
-
-interface IDecor {
-  _id: string;
-  title: string;
-  description: string;
-  price: number;
-  mainImage: string;
-  additionalImages: string[];
-  additionalFields: IAdditionalField[];
-  createdAt: string;
-}
+import { IDecor } from "@/types/decor.type";
+import "./index.scss";
 
 const DecorPage = () => {
   const params = useParams();
@@ -89,7 +73,6 @@ const DecorPage = () => {
       </>
     );
   }
-
   const allImages = [decor.mainImage, ...(decor.additionalImages || [])];
   const hasMultipleImages = allImages.length > 1;
 

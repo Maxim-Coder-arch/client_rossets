@@ -1,22 +1,21 @@
 @use "../../global_styles/colors/colors.scss" as *;
 @use "../../global_styles/mixins/mixins.scss" as *;
 
-.decor-card {
+.series-card {
   flex: 0 1 calc(25% - 24px);
-  min-width: 250px;
+  min-width: 200px;
   background-color: $white;
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
   cursor: pointer;
-  max-width: 250px;
   
   &:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
     
-    .decor-card__link {
+    .series-card__link {
       background-color: $pale-text;
       color: $white;
     }
@@ -27,11 +26,12 @@
   }
   
   @media (max-width: 768px) {
-    flex: 0 1 calc(50% - 24px);
+    flex: 0 1 calc(50% - 12px);  // ← 2 колонки на планшете
+    min-width: auto;
   }
   
   @media (max-width: 480px) {
-    flex: 0 1 100%;
+    flex: 0 1 calc(50% - 12px);  // ← 2 колонки на телефоне
   }
   
   &__image {

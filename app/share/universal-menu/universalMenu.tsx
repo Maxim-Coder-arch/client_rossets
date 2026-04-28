@@ -1,4 +1,3 @@
-// universal-menu/universalMenu.tsx
 import "./index.scss";
 
 interface ILogicUniversalMenu {

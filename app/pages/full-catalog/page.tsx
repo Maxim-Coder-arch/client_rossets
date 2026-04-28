@@ -4,8 +4,10 @@ import SeriesCard from "@/app/share/series-card/seriesCard";
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import { useEffect, useState } from "react";
-import "./index.scss";
 import DecorCard from "@/app/share/decorCard/decorCard";
+import { ISeries } from "@/types/series.type";
+import { IDecor } from "@/types/decor.type";
+import "./index.scss";
 
 const dataLogicMenu = [
   {
@@ -19,8 +21,8 @@ const dataLogicMenu = [
 ]
 
 const FullCatalog = () => {
-  const [seriesData, setSeriesData] = useState<any[]>([]);
-  const [decorsData, setDecorsData] = useState<any[]>([]);
+  const [seriesData, setSeriesData] = useState<ISeries[]>([]);
+  const [decorsData, setDecorsData] = useState<IDecor[]>([]);
   useEffect(() => {
     const fetchSeries = async () => {
       try {
@@ -32,7 +34,6 @@ const FullCatalog = () => {
         console.error("Ошибка загрузки серий:", err);
       }
     };
-
     fetchSeries();
   }, []);
 

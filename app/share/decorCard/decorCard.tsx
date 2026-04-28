@@ -1,8 +1,9 @@
 import Image from "next/image";
-import "./index.scss";
 import Link from "next/link";
+import { IDecor } from "@/types/decor.type";
+import "./index.scss";
 
-const DecorCard = ({ decor }) => {
+const DecorCard = ({ decor }: {decor: IDecor}) => {
   return (
     <div className="decor-card">
       <div className="decor-card__image">

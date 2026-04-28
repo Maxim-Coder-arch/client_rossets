@@ -4,27 +4,13 @@ import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { seriesData } from "@/data/series.data";
-import "./index.scss";
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import SeriesCard from "@/app/share/series-card/seriesCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import ModalOrderProduct from "@/app/share/modal-order-products/modalOrderProduct";
-
-interface IProduct {
-  _id: string;
-  image: string;
-  additionalImages: string[];
-  seriesId: string;
-  seriesNumber: string;
-  rossetSeries: string;
-  rossetNumber: number;
-  rossetDiameter: number;
-  numberOfTails: number;
-  tailLength: number;
-  comment: string;
-  price: number;
-}
+import { IProduct } from "@/types/product.type";
+import "./index.scss";
+import { ISeries } from "@/types/series.type";
 
 const ProductPage = () => {
   const params = useParams();
@@ -33,7 +19,7 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isOpenModalOrderProducts, setIsOpenModalOrderProducts] = useState(false);
-  const [series, setSeries] = useState<any[]>([]);
+  const [series, setSeries] = useState<ISeries[]>([]);
 
   useEffect(() => {
     const fetchProduct = async () => {

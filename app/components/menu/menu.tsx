@@ -1,23 +1,5 @@
+import { dataMenu } from "@/data/menu.data";
 import "./index.scss";
-
-export const dataMenu =[
-  {
-    label: "Главная",
-    link: "/"
-  },
-  {
-    label: "Каталог",
-    link: "/"
-  },
-  {
-    label: "Преимущества",
-    link: "/"
-  },
-  {
-    label: "Контакты",
-    link: "/"
-  },
-]
 
 const Menu = () => {
   return (

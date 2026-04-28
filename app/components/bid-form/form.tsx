@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import BidFormSectionUi from "@/app/features/bid-form-section-ui";
 import "./index.scss";
 
 const BidForm = () => {
@@ -23,28 +24,20 @@ const BidForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Сбрасываем предыдущее сообщение
     setMessage(null);
-    
-    // Валидация
     if (!formData.name.trim()) {
       setMessage({ type: "error", text: "Введите имя" });
       return;
     }
-    
     if (!formData.contact.trim()) {
       setMessage({ type: "error", text: "Введите почту или телефон" });
       return;
     }
-    
     if (!agreed) {
       setMessage({ type: "error", text: "Подтвердите согласие с политикой конфиденциальности" });
       return;
     }
-    
     setIsLoading(true);
-    
     try {
       const response = await fetch("/api/bid-without-goods", {
         method: "POST",
@@ -53,12 +46,9 @@ const BidForm = () => {
         },
         body: JSON.stringify(formData),
       });
-      
       const data = await response.json();
-      
       if (response.ok) {
         setMessage({ type: "success", text: "Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время." });
-        // Очищаем форму
         setFormData({ name: "", contact: "", socialLink: "", comment: "" });
         setAgreed(false);
       } else {
@@ -72,83 +62,14 @@ const BidForm = () => {
     }
   };
 
-  return (
-    <section id="bid-form">
-      <div className="bid">
-        <div className="bid__label">
-          <div className="bid__label__content">
-            <h2>Оставить заявку</h2>
-            <p>Оставьте заявку в форме, мы сами свяжемся с вами в ближайшее время</p>
-            <div className="bid__label__content__choice">
-              <div className="bid__label__content__choice__block"></div>
-              или свяжитесь с нами
-              <div className="bid__label__content__choice__block"></div>
-            </div>
-            <a href="tel:89125637645">+7 (912) 563-76-45</a>
-            <a href="https://vk.com/vividribbon">ВКонтакте</a>
-          </div>
-        </div>
-        
-        <form className="bid__form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Имя*"
-            value={formData.name}
-            onChange={handleChange}
-            disabled={isLoading}
-          />
-          <input
-            type="text"
-            name="contact"
-            placeholder="Почта или телефон*"
-            value={formData.contact}
-            onChange={handleChange}
-            disabled={isLoading}
-          />
-          <input
-            type="text"
-            name="socialLink"
-            placeholder="Ссылка на соцсеть (необязательно)"
-            value={formData.socialLink}
-            onChange={handleChange}
-            disabled={isLoading}
-          />
-          <textarea
-            name="comment"
-            placeholder="Комментарий (необязательно)"
-            value={formData.comment}
-            onChange={handleChange}
-            disabled={isLoading}
-            rows={3}
-          />
-          
-          <div className="bid__form__checkbox">
-            <input
-              type="checkbox"
-              id="checkbox"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              disabled={isLoading}
-            />
-            <label htmlFor="checkbox">
-              Нажимая кнопку «Отправить» вы соглашаетесь с политикой конфиденциальности
-            </label>
-          </div>
-          
-          {message && (
-            <div className={`bid__form__message ${message.type}`}>
-              {message.text}
-            </div>
-          )}
-          
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? "Отправка..." : "Отправить"}
-          </button>
-        </form>
-      </div>
-    </section>
-  );
+  return <BidFormSectionUi 
+  handleSubmit={handleSubmit} 
+  handleChange={handleChange} 
+  formData={formData} 
+  isLoading={isLoading} 
+  setAgreed={setAgreed} 
+  message={message} 
+  agreed={agreed} />
 };
 
 export default BidForm;
