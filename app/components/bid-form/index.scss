@@ -124,6 +124,11 @@
           color: $main-text-2;
           padding: 5px 20px;
           border-radius: 20px;
+          &:hover {
+            background-color: $main-text;
+            color: $white;
+            transform: translateX(-4px);
+          }
 
           @media (max-width: 768px) {
             font-size: 0.9rem;
@@ -197,6 +202,10 @@
         @include font(1.4rem, 800);
         color: $main-text-2;
         cursor: pointer;
+
+        &:hover {
+          background-color: $pale-yellow;
+        }
 
         @media (max-width: 768px) {
           font-size: 1.2rem;

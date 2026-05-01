@@ -1,3 +1,6 @@
+'use client';
+import { motion } from "framer-motion";
+
 interface IMetaCompanyUiDataProps {
   label: string;
   description: string;
@@ -7,7 +10,11 @@ const MetaCompanyUi = ({ data }: { data: IMetaCompanyUiDataProps[] }) => {
   return (
     <section id="meta-company">
       <div className="meta-company">
-        <div className="meta-company__content">
+        <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1.4 }}
+        className="meta-company__content">
           <div className="meta-company__content__title">
             <h2>Индивидуальность - акцентная лента</h2>
             <p>Стандартным акцентом является цветная парчовая лента: золото, серебро, бронза, красный, синий, малиновый, тёмно-розовый, голубой,
@@ -27,7 +34,7 @@ const MetaCompanyUi = ({ data }: { data: IMetaCompanyUiDataProps[] }) => {
               )
             })}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

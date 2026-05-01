@@ -15,7 +15,7 @@
     };
   }
   &__content {
-    padding-top: 100px;
+    padding-top: 130px;
     padding-bottom: 50px;
     width: 100%;
     justify-content: center;
@@ -53,6 +53,12 @@
         padding: 5px 10px;
         border-radius: 5px;
         cursor: pointer;
+        &:hover {
+          background-color: $main-text;
+          color: $white;
+          rotate: 2deg;
+          scale: 1.1;
+        }
         @media screen and (max-width: 1080px) {
           font-size: .8rem;
         }
@@ -73,6 +79,10 @@
           background-color: $main-text;
           color: $white;
           border-radius: 5px;
+          &:hover {
+            color: $main-text-2;
+            background-color: $pale-yellow;
+          }
           @media screen and (max-width: 1080px) {
             padding: 5px 10px;
             font-size: 1rem;
@@ -87,6 +97,10 @@
           column-gap: 10px;
           color: $second-text;
           align-items: center;
+          &:hover {
+            color: $main-bg-2;
+            background-color: $main-text;
+          }
           @media screen and (max-width: 1080px) {
             font-size: 1rem;
           }

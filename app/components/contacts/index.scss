@@ -94,6 +94,9 @@
         @media screen and (max-width: 660px) {
           font-weight: 400;
         }
+        &:hover {
+          color: $pale-yellow;
+        }
       }
     }
   }

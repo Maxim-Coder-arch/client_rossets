@@ -33,6 +33,7 @@ const FullCatalog = () => {
   const [seriesLimit, setSeriesLimit] = useState(10);
   const [sortType, setSortType] = useState<"default" | "newest" | "oldest">("default");
   const [searchQuery, setSearchQuery] = useState("");
+  const [showContent, setShowContent] = useState(false);
   
   const itemsPerPage = 2;
   const seriesPerLoad = 10;
@@ -41,6 +42,14 @@ const FullCatalog = () => {
   const end = start + itemsPerPage;
   const visibleDecors = decorsData.slice(start, end);
   const totalPages = Math.ceil(decorsData.length / itemsPerPage);
+
+  // Показываем контент после лоадера
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowContent(true);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Загрузка серий
   useEffect(() => {
@@ -150,7 +159,6 @@ const FullCatalog = () => {
       repeat: Infinity,
       repeatType: "loop"
     });
-    
     return () => animateX.stop();
   }, [baseX]);
 
@@ -159,12 +167,16 @@ const FullCatalog = () => {
       <LogicUniversalMenu data={dataLogicMenu} />
       <section id="full-catalog-section" className="full-catalog-section">
         <div className="full-calalog">
-          <div className="full-catalog__filteres">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            animate={showContent ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="full-catalog__filteres"
+          >
             <div className="full-catalog__filteres__title">
               <h2>Фильтры</h2>
             </div>
             
-            {/* Сортировка */}
             <div className="full-catalog__filteres__buttons">
               <h3>Сортировка:</h3>
               <div className="full-catalog__filteres__buttons__container">
@@ -189,7 +201,6 @@ const FullCatalog = () => {
               </div>
             </div>
 
-            {/* Поиск */}
             <input 
               type="text" 
               placeholder="Поиск серии" 
@@ -197,7 +208,6 @@ const FullCatalog = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
 
-            {/* Все серии (левое меню) */}
             <div className="full-catalog__filteres__all-series">
               <h3>Все серии</h3>
               <ul>
@@ -209,7 +219,6 @@ const FullCatalog = () => {
               </ul>
             </div>
 
-            {/* Все декоры */}
             <div className="full-catalog__filteres__all-decors">
               <h3>Все декоры</h3>
               <ul>
@@ -220,30 +229,60 @@ const FullCatalog = () => {
                 ))}
               </ul>
             </div>
-          </div>
+          </motion.div>
           
           <div className="full-calalog__content">
             {/* Декоры */}
-            {!searchQuery.length && <div className="full-calalog__content__decors">
-              <div className="full-calalog__content__series__title">
-                <h2>Декоры</h2>
-                <span>Всего декоров: {decorsData.length}</span>
+            {!searchQuery.length && (
+              <div className="full-calalog__content__decors">
+                <motion.div 
+                  initial={{ y: -30, opacity: 0 }}
+                  animate={showContent ? { y: 0, opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="full-calalog__content__series__title"
+                >
+                  <h2>Декоры</h2>
+                  <span>Всего декоров: {decorsData.length}</span>
+                </motion.div>
+                
+                <div className="full-calalog__content__decors__navigation">
+                  <motion.button 
+                    initial={{ scale: 0 }}
+                    animate={showContent ? { scale: 1 } : {}}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                    onClick={goToPrev}
+                  >
+                    <ArrowLeftIcon />
+                  </motion.button>
+                  <motion.button 
+                    initial={{ scale: 0 }}
+                    animate={showContent ? { scale: 1 } : {}}
+                    transition={{ duration: 0.3, delay: 0.35 }}
+                    onClick={goToNext}
+                  >
+                    <ArrowRightIcon />
+                  </motion.button>
+                  <motion.span
+                    initial={{ opacity: 0 }}
+                    animate={showContent ? { opacity: 1 } : {}}
+                    transition={{ duration: 0.3, delay: 0.4 }}
+                  >
+                    {currentPage + 1} / {totalPages}
+                  </motion.span>
+                </div>
+                
+                <motion.div 
+                  className="full-calalog__content__decors__cards"
+                  initial={{ opacity: 0 }}
+                  animate={showContent ? { opacity: 1 } : {}}
+                  transition={{ duration: 0.5, delay: 0.45 }}
+                >
+                  {visibleDecors.map(item => (
+                    <DecorCardDesign product={item} key={item._id} />
+                  ))}
+                </motion.div>
               </div>
-              <div className="full-calalog__content__decors__navigation">
-                <button onClick={goToPrev}>
-                  <ArrowLeftIcon />
-                </button>
-                <button onClick={goToNext}>
-                  <ArrowRightIcon />
-                </button>
-                <span>{currentPage + 1} / {totalPages}</span>
-              </div>
-              <div className="full-calalog__content__decors__cards">
-                {visibleDecors.map(item => (
-                  <DecorCardDesign product={item} key={item._id} />
-                ))}
-              </div>
-            </div>}
+            )}
             
             {/* Бегущий баннер */}
             <div className="full-calalog__content__banner">
@@ -251,6 +290,9 @@ const FullCatalog = () => {
                 ref={containerRef}
                 className="full-calalog__content__banner__track"
                 style={{ x: baseX }}
+                initial={{ opacity: 0 }}
+                animate={showContent ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.5 }}
               >
                 {Array.from({ length: 14 }).map((_, index) => (
                   <div key={index} className="full-calalog__content__banner__label">
@@ -267,19 +309,38 @@ const FullCatalog = () => {
             
             {/* Серии */}
             <div className="full-calalog__content__series">
-              <div className="full-calalog__content__series__title">
+              <motion.div 
+                className="full-calalog__content__series__title"
+                initial={{ y: -30, opacity: 0 }}
+                animate={showContent ? { y: 0, opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.55 }}
+              >
                 <h2>Серии</h2>
                 <span>Всего серий: {filteredSeries.length}</span>
-              </div>
-              <TemplateCards>
-                {visibleSeries.map(item => (
-                  <SeriesCardDesign product={item} key={item._id} />
-                ))}
-              </TemplateCards>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={showContent ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.6 }}
+              >
+                <TemplateCards>
+                  {visibleSeries.map(item => (
+                    <SeriesCardDesign product={item} key={item._id} />
+                  ))}
+                </TemplateCards>
+              </motion.div>
+              
               {visibleSeries.length < filteredSeries.length && (
-                <button onClick={loadMore} className="load-more">
+                <motion.button 
+                  onClick={loadMore} 
+                  className="load-more"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={showContent ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.7 }}
+                >
                   Загрузить еще ({filteredSeries.length - visibleSeries.length} осталось)
-                </button>
+                </motion.button>
               )}
             </div>
           </div>
@@ -290,6 +351,8 @@ const FullCatalog = () => {
 };
 
 export default FullCatalog;
+
+
 
 
 export const SeriesCardDesign = ({ product }: { product: ISeries }) => {

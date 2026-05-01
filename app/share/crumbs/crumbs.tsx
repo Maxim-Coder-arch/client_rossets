@@ -3,8 +3,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import "./index.scss";
 import LinkIcon from "@/public/icons/link";
+import { motion } from "framer-motion";
+import "./index.scss";
 
 const Breadcrumbs = () => {
   const pathname = usePathname();
@@ -37,7 +38,11 @@ const Breadcrumbs = () => {
 
   return (
     <div className="breadcrumbs">
-      <div className="breadcrumbs__container">
+      <motion.div 
+      initial={{y: 100, opacity: 0}}
+      animate={{y: 0, opacity: 1}}
+      transition={{duration: 0.5, delay: 1}}
+      className="breadcrumbs__container">
         <Link className="breadcrumbs__container__logo" href="/">
           Vivid Ribbon
         </Link>
@@ -60,7 +65,7 @@ const Breadcrumbs = () => {
             <LinkIcon />
           </Link>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

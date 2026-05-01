@@ -29,6 +29,11 @@
     background-color: $pale-yellow;
     @include font(20px, 700);
     color: $main-text-2;
+    transition: all 0.3s ease;
+    &:hover {
+      background-color: $main-text-2;
+      color: $white;
+    }
   }
   &_meta {
     width: 100%;
@@ -87,6 +92,11 @@
     &.active-tablink {
       color: $main-text-2;
       background-color: $pale-yellow;
+    }
+
+    &:hover {
+      background-color: rgb(121, 44, 121);
+      color: $white;
     }
   }
   
