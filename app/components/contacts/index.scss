@@ -1,250 +1,100 @@
 @use "../../global_styles/colors/colors.scss" as *;
 @use "../../global_styles/mixins/mixins.scss" as *;
 
+
 .contacts {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4rem;
-  row-gap: 3rem;
-  background-color: $white;
-  
-  &__title {
+  width: 100vw;
+  background-color: $main-text-2;
+  &__content {
+    width: 100%;
+    padding: {
+      top: 5rem;
+      bottom: 5rem;
+    };
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 3rem;
-    width: 100%;
-    
-    & h2 {
-      @include font(48px, 500);
-      color: $pale-text;
-      
-      // улучшение для десктопа
-      text-align: center;
+    row-gap: 4rem;
+    &__wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      &__contact-block {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        @media screen and (max-width: 660px) {
+          flex-direction: column;
+          width: fit-content;
+        }
+      }
+      @media screen and (max-width: 660px) {
+        width: 100%;
+        justify-content: center;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 15px;
+      }
     }
-    
-    & p {
-      @include font(18px, 400);
-      color: $main-text;
-      max-width: 500px;
-      line-height: 150%;
-      text-align: center;
+    &__header {
+      width: 100%;
+      max-width: 1200px;
+      & h2 {
+        @include font(3rem, 800);
+        color: $pale-white;
+        text-align: left;
+        @media screen and (max-width: 660px) {
+         font-size: 2rem;
+        }
+      }
+      & p {
+        @include font(2rem, 500);
+        text-align: right;
+        color: $second-text;
+        @media screen and (max-width: 660px) {
+         font-size: 1rem;
+         text-align: left;
+        }
+      }
     }
-  }
-  
-  &__content {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
     &__image {
-      width: 566px;
-      height: 566px;
+      width: 500px;
+      height: 500px;
       background-size: cover;
       background-position: center;
       background-image: url("/contacts/contacts.jpg");
-      border-radius: 20px; // улучшение: скругляем углы
+      border-radius: 50%;
+      outline: solid 1px rgba($white, 0.3);
+      outline-offset: 10px;
+      outline-width: 4px;
+      box-shadow: 0px 0px 10px rgba($white, 0.3);
+      @media screen and (max-width: 660px) {
+        width: 100px;
+        height: 100px;
+      }
     }
-    
-    &__items {
+    &__contact {
       display: flex;
       flex-direction: column;
-      row-gap: 60px;
-      
-      &__contact {
-        display: flex;
-        align-items: center;
-        column-gap: 20px;
-        
-        // улучшение: ховер для всей строки
-        transition: all 0.2s ease;
-        
-        &:hover {
-          transform: translateX(5px);
-        }
-        
-        & a {
-          color: $main-text;
-          @include font(22px, 600);
-          text-decoration: none;
-          transition: color 0.2s ease;
-          
-          &:hover {
-            color: $pale-text;
-          }
-        }
-        
-        &__icon {
-          width: 70px;
-          height: 70px;
-          background-color: $pale-grey;
-          border-radius: 10px;
-          display: grid;
-          place-items: center;
-          transition: all 0.2s ease;
-          
-          &:hover {
-            background-color: $pale-text;
-            transform: scale(1.05);
-          }
-          
-          & svg {
-            width: 40px;
-            height: 40px;
-            color: $white;
-          }
-        }
+      align-items: center;
+      @media screen and (max-width: 660px) {
+        flex-direction: row;
       }
-    }
-  }
-}
-
-// ============================================
-// АДАПТИВ ДЛЯ CONTACTS
-// ============================================
-
-/* Планшеты (до 1024px) */
-@media (max-width: 1024px) {
-  .contacts {
-    padding-top: 3rem;
-    row-gap: 2rem;
-  }
-  
-  .contacts__title h2 {
-    font-size: 36px;
-  }
-  
-  .contacts__title p {
-    font-size: 16px;
-    max-width: 80%;
-  }
-  
-  .contacts__content {
-    width: 90%;
-    flex-direction: column;
-    gap: 40px;
-  }
-  
-  .contacts__content__image {
-    width: 400px;
-    height: 400px;
-  }
-  
-  .contacts__content__items {
-    row-gap: 40px;
-    align-items: center;
-  }
-  
-  .contacts__content__items__contact a {
-    font-size: 18px;
-  }
-  
-  .contacts__content__items__contact__icon {
-    width: 60px;
-    height: 60px;
-    
-    & svg {
-      width: 32px;
-      height: 32px;
-    }
-  }
-}
-
-/* Телефоны горизонтально (до 768px) */
-@media (max-width: 768px) {
-  .contacts {
-    padding: 3rem 20px;
-  }
-  
-  .contacts__title h2 {
-    font-size: 28px;
-  }
-  
-  .contacts__title p {
-    font-size: 14px;
-    max-width: 90%;
-  }
-  
-  .contacts__content {
-    width: 100%;
-  }
-  
-  .contacts__content__image {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    aspect-ratio: 1 / 1;
-  }
-  
-  .contacts__content__items {
-    row-gap: 30px;
-  }
-  
-  .contacts__content__items__contact {
-    column-gap: 15px;
-    
-    & a {
-      font-size: 16px;
-    }
-    
-    &__icon {
-      width: 50px;
-      height: 50px;
-      
       & svg {
-        width: 28px;
-        height: 28px;
+        color: $main-bg-2;
+        width: 70px;
+        @media screen and (max-width: 660px) {
+          width: 30px;
+        }
+      }
+      & a {
+        @include font(.9rem, 800);
+        color: $pale-white;
+        @media screen and (max-width: 660px) {
+          font-weight: 400;
+        }
       }
     }
-  }
-}
-
-/* Маленькие телефоны (до 480px) */
-@media (max-width: 480px) {
-  .contacts {
-    padding: 2rem 16px;
-  }
-  
-  .contacts__title h2 {
-    font-size: 24px;
-  }
-  
-  .contacts__title p {
-    font-size: 13px;
-  }
-  
-  .contacts__content__image {
-    max-width: 280px;
-  }
-  
-  .contacts__content__items {
-    row-gap: 25px;
-  }
-  
-  .contacts__content__items__contact {
-    flex-direction: column;
-    text-align: center;
-    gap: 12px;
-    
-    & a {
-      font-size: 14px;
-    }
-    
-    &__icon {
-      width: 45px;
-      height: 45px;
-      
-      & svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
-  
-  .contacts__content__items__contact:hover {
-    transform: translateX(0);
   }
 }

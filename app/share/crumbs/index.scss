@@ -1,0 +1,90 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.breadcrumbs {
+  width: 100%;
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  
+  @media (max-width: 768px) {
+    bottom: 80px;
+  }
+  
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($main-text-2, 0.9);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 8px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba($pale-yellow, 0.3);
+    pointer-events: auto;
+    &__logo {
+      @include font(1rem, 800);
+      color: $main-bg-2;
+    }
+    &__bid {
+      padding: 10px 10px;
+      background-color: $pale-white;
+      @include font(1rem, 800);
+      color: $main-text-2;
+      border-radius: 5px;
+    }
+  }
+  
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background: $main-bg-2;
+    border-radius: 5px;
+    @include font(13px, 800);
+    color: $main-text-2;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    
+    @media (max-width: 768px) {
+      padding: 4px 12px;
+      font-size: 11px;
+    }
+  }
+  
+  &__current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 18px;
+    background: $pale-yellow;
+    border-radius: 5px;
+    @include font(13px, 800);
+    color: $main-text-2;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    cursor: default;
+    
+    @media (max-width: 768px) {
+      padding: 4px 12px;
+      font-size: 11px;
+    }
+  }
+  
+  &__separator {
+    display: none;
+  }
+}

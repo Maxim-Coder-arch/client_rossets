@@ -2,276 +2,149 @@
 @use "../../global_styles/mixins/mixins.scss" as *;
 
 .hero-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100vh;
-  max-height: 800px;
-  background-color: $pale-blue;
-  position: relative;
-  &__image {
-    height: 100%;
-    display: flex;
-    align-items: flex-end;
-    &__wrapper {
-      width: 100%;
-      height: 80%;
-      background-size: cover;
-      background-position: center;
-      border-top-left-radius: 63px;
-      background-image: url("/hero-section/hero-section.jpg");
-    }
+  width: 100vw;
+  background-color: $main-bg-2;
+  padding: {
+    left: 50px;
+    right: 50px;
+  };
+  @media screen and (max-width: 690px) {
+    padding: {
+      left: 10px;
+      right: 10px;
+    };
   }
   &__content {
-    padding-left: 63px;
-    max-width: 570px;
-    z-index: 2;
-    &__area {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    &__header {
+      width: 100%;
       display: flex;
-      flex-direction: column;
-      row-gap: 30px;
-      & p {
-        color: $main-text;
-        @include font(14px, 400);
-      }
-      & h1 {
-        color: $main-text;
-        @include font(46px, 700);
+      justify-content: space-between;
+      margin-bottom: 7rem;
+      align-items: center;
+      @media screen and (max-width: 960px) {
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex-direction: column;
+        row-gap: 10px;
       }
       & span {
+        @include font(1rem, 800);
         color: $second-text;
-        @include font(16px, 400);
+        max-width: 400px;
+        line-height: 15px;
+        @media screen and (max-width: 1080px) {
+          font-size: .9rem;
+        }
+        @media screen and (max-width: 960px) {
+          max-width: 300px;
+        }
       }
-      &__target-actions {
+      & button {
+        @include font(1em, 700);
+        color: $main-text;
+        background-color: $pale-yellow;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        @media screen and (max-width: 1080px) {
+          font-size: .8rem;
+        }
+        @media screen and (max-width: 960px) {
+          width: 100%;
+        }
+      }
+      &__links {
         display: flex;
-        column-gap: 20px;
-        &__look-catalog-up {
-          background-color: $white;
-          width: 150px;
-          height: 40px;
-          border-radius: 4px;
-          display: grid;
-          place-items: center;
-          @include font(14px, 500);
-          color: $main-text;
-          cursor: pointer;
+        align-items: center;
+        column-gap: 30px;
+        @media screen and (max-width: 960px) {
+          flex-direction: column;
+        }
+        &__order {
+          @include font(2em, 800);
+          padding: 5px 20px;
+          background-color: $main-text;
+          color: $white;
+          border-radius: 5px;
+          @media screen and (max-width: 1080px) {
+            padding: 5px 10px;
+            font-size: 1rem;
+          }
+          @media screen and (max-width: 960px) {
+            width: 100%;
+          }
         }
         &__relations {
-          @include font(14px, 500);
-          color: $main-text;
-          cursor: pointer;
-        }
-      }
-    }
-  }
-  &__bottom-wrapper {
-    width: 100%;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    position: absolute;
-    bottom: -40px;
-    &__points {
-      width: 90%;
-      height: 100%;
-      background-color: rgba($pale-white, 0.8);
-      backdrop-filter: blur(20px);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: {
-        left: 30px;
-        right: 30px;
-      };
-      & button {
-        background-color: $white;
-        width: 150px;
-        height: 40px;
-        border-radius: 4px;
-        @include font(14px, 500);
-        color: $main-text;
-        cursor: pointer;
-      }
-      &__item {
-        width: calc((100% / 4) - 150px);
-        & h2 {
-          @include font(16px, 600);
-          color: $main-text;
-        }
-        & p {
-          @include font(14px, 400);
+          @include font(2em, 800);
+          display: flex;
+          column-gap: 10px;
           color: $second-text;
+          align-items: center;
+          @media screen and (max-width: 1080px) {
+            font-size: 1rem;
+          }
+          & svg {
+            width: 50px;
+            height: 50px;
+            @media screen and (max-width: 1080px) {
+              width: 30px;
+              height: 30px;
+            }
+          }
         }
       }
     }
-  }
-}
-.template {
-  width: 50%;
-}
-
-.hero-section-footer {
-  background-color: $pale-white-2;
-  width: 100%;
-  height: 145px;
-}
-
-
-
-
-
-
-
-
-
-// ============================================
-// АДАПТИВ ДЛЯ HERO SECTION
-// ============================================
-
-/* Планшеты (768px - 1024px) */
-@media (max-width: 1024px) {
-  .hero-section {
-    max-height: none;
-    min-height: 100vh;
-  }
-
-  .hero-section__content {
-    padding-left: 40px;
-    max-width: 450px;
-  }
-
-  .hero-section__content__area h1 {
-    font-size: 36px;
-  }
-
-  .hero-section__content__area span {
-    font-size: 14px;
-  }
-
-  .hero-section__bottom-wrapper__points__item h2 {
-    font-size: 14px;
-  }
-
-  .hero-section__bottom-wrapper__points__item p {
-    font-size: 12px;
-  }
-}
-
-/* Телефоны горизонтально (576px - 768px) */
-@media (max-width: 768px) {
-  .hero-section {
-    flex-direction: column;
-    height: auto;
-    min-height: auto;
-  }
-
-  .template {
-    width: 100%;
-  }
-
-  .hero-section__content {
-    padding: 60px 30px 40px;
-    max-width: 100%;
-    text-align: center;
-  }
-
-  .hero-section__content__area {
-    align-items: center;
-  }
-
-  .hero-section__content__area h1 {
-    font-size: 32px;
-  }
-
-  .hero-section__content__area__target-actions {
-    justify-content: center;
-  }
-
-  .hero-section__image {
-    width: 100%;
-    height: 300px;
-  }
-
-  .hero-section__image__wrapper {
-    height: 100%;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-  }
-
-  .hero-section__bottom-wrapper {
-    position: static;
-    margin-top: -20px;
-    margin-bottom: 40px;
-    height: auto;
-  }
-
-  .hero-section__bottom-wrapper__points {
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 25px 20px;
-    backdrop-filter: blur(10px);
-  }
-
-  .hero-section__bottom-wrapper__points__item {
-    width: calc(50% - 10px);
-  }
-
-  .hero-section__bottom-wrapper__points button {
-    margin-top: 10px;
-  }
-}
-
-/* Маленькие телефоны (до 576px) */
-@media (max-width: 576px) {
-  .hero-section__content {
-    padding: 60px 20px 30px;
-    &__area {
-      row-gap: 10px;
+    &__company-name {
+      text-align: center;
+      & h1 {
+        @include font(7rem, 800);
+        color: $main-text-2;
+        letter-spacing: 4px;
+        @media screen and (max-width: 1080px) {
+          font-size: 3rem;
+          letter-spacing: 2px;
+        }
+        @media screen and (max-width: 690px) {
+          font-size: 2rem;
+        }
+      }
+      & span {
+        @include font(4rem, 800);
+        color: $second-text;
+        letter-spacing: -5px;
+        @media screen and (max-width: 1080px) {
+          font-size: 2rem;
+          letter-spacing: 2px;
+        }
+        & strong {
+          background-color: $pale-yellow;
+          color: $main-text-2;
+        }
+      }
     }
-  }
-
-  .hero-section__content__area h1 {
-    font-size: 28px;
-  }
-
-  .hero-section__content__area p {
-    font-size: 12px;
-  }
-
-  .hero-section__content__area span {
-    font-size: 13px;
-  }
-
-  .hero-section__content__area__target-actions {
-    flex-direction: column;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .hero-section__content__area__target-actions__look-catalog-up {
-    width: 100%;
-  }
-
-  .hero-section__image {
-    height: 250px;
-  }
-
-  .hero-section__bottom-wrapper__points {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .hero-section__bottom-wrapper__points__item {
-    width: 100%;
-    text-align: center;
-  }
-
-  .hero-section__bottom-wrapper__points button {
-    width: 100%;
-  }
-
-  .hero-section-footer {
-    height: 60px;
+    &__points {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      column-gap: 3rem;
+      @media screen and (max-width: 1000px) {
+        display: none;
+      }
+      & span {
+        @include font(.7em, 100);
+        color: $main-text-2;
+      }
+      & h2 {
+        @include font(1em, 800);
+        color: $main-text;
+      }
+    }
   }
 }

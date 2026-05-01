@@ -3,6 +3,7 @@ import "./global_styles/reset/reset.scss";
 import type { Metadata } from "next";
 import LoaderComponent from "./share/loader/loader";
 import { Tracker } from "./share/tracker/tracker";
+import Breadcrumbs from "./share/crumbs/crumbs";
 
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
         <LoaderComponent />
         {children}
         <Footer />
+        <Breadcrumbs />
         <Tracker />
       </body>
     </html>

@@ -83,28 +83,34 @@ const Product = () => {
   return (
     <>
       <LogicUniversalMenu data={dataLogicMenu} />
-      <div className="series-page">
-        <div className="series-page__banner">
-          <Image src={seriesFilterData.image} alt="Series image" width={1000} height={500} />
-          <div className="series-page__banner__overlay">
-            <h1 className="series-page__banner__title">{seriesFilterData.seriesTitle}</h1>
-            <p className="series-page__banner__count">Розеток в серии: {products.length}</p>
+      <section id="series-page">
+        <div className="series-page">
+          <div className="series-page__content">
+            <div className="series-page__content__banner">
+              <div className="series-page__content__banner__card-series">
+                <div className="series-page__content__banner__card-series__image">
+                  <Image src={seriesFilterData.image} alt="Series image" width={1000} height={500} />
+                </div>
+                <div className="series-page__content__banner__card-series__content">
+                  <p>Название серии:</p>
+                  <h2>{seriesFilterData.seriesTitle}</h2>
+                  <span>Розеток в серии: {products.length}</span>
+                </div>
+              </div>
+            </div>
+            <div className="series-page__content__label-title">
+              <h2>Розетки в этой серии</h2>
+            </div>
+            <div className="series-page__content__rossets">
+              <TemplateCards>
+                {products.map((product: IProduct) => (
+                  <RossetCard key={product._id} {...product} />
+                ))}
+              </TemplateCards>
+            </div>
           </div>
         </div>
-        <div className="series-page__wrapper">
-          {loading ? (
-            <div className="loading-spinner">Загрузка...</div>
-          ) : products.length === 0 ? (
-            <div className="empty-series">В этой серии пока нет розеток</div>
-          ) : (
-            <TemplateCards>
-              {products.map((product: IProduct) => (
-                <RossetCard key={product._id} {...product} />
-              ))}
-            </TemplateCards>
-          )}
-        </div>
-      </div>
+      </section>
     </>
   );
 };

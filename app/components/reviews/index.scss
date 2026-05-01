@@ -2,296 +2,138 @@
 @use "../../global_styles/mixins/mixins.scss" as *;
 
 .reviews {
-  width: 100%;
+  min-height: 500px;
+  width: 100vw;
+  background-color: $main-text-2;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 0;
-  background-color: $white;
-  
-  &__title {
+  justify-content: center;
+  &__content {
+    padding: {
+      top: 4rem;
+      bottom: 4rem;
+    };
+    width: 100%;
+    max-width: 1200px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    row-gap: 1rem;
-    width: 100%;
-    margin-bottom: 3rem;
-    
-    h2 {
-      @include font(48px, 500);
-      color: $pale-text;
-      text-align: center;
-    }
-    
-    p {
-      @include font(18px, 400);
-      color: $main-text;
-      max-width: 500px;
-      line-height: 150%;
-      text-align: center;
-    }
-  }
-  
-  &__slider-container {
-    width: 100%;
-    overflow: hidden;
-  }
-  
-  &__content {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 50px;
-    
-    &__item {
-      background-color: $card;
-      border-radius: 16px;
-      padding: 24px;
-      transition: all 0.3s ease;
-      
-      &:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-      }
-      
-      &__header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-        flex-wrap: wrap;
-        
-        &__image {
-          width: 48px;
-          height: 48px;
-          border-radius: 50%;
-          background-color: $pale-white;
-          display: grid;
-          place-items: center;
-          flex-shrink: 0;
-          
-          svg {
-            width: 24px;
-            height: 24px;
-            color: $pale-text;
-          }
-        }
-        
-        &__name {
-          @include font(16px, 600);
-          color: $pale-text;
-          flex: 1;
-        }
-        
-        &__rating {
-          @include font(14px, 500);
-          color: #FFB800;
-          letter-spacing: 2px;
-        }
-      }
-      
-      &__text {
-        @include font(15px, 400);
-        line-height: 1.6;
-        color: $main-text;
-      }
-    }
-  }
-  
-  &__navigation {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 3rem;
-    
-    &__template {
-      width: 80%;
-      max-width: 1200px;
+    &__header {
+      width: 100%;
       display: flex;
       justify-content: space-between;
+      margin-bottom: 30px;
+      & span {
+        @include font(1rem, 800);
+        color: $pale-white;
+      }
+    }
+    &__item {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: dashed 1px rgba($white, 0.2);
       align-items: center;
-    }
-    
-    &__dots {
-      display: flex;
-      gap: 12px;
-    }
-    
-    &__dot {
-      width: 10px;
-      height: 10px;
-      background-color: $pale-grey;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      
-      &.active {
-        width: 28px;
-        background-color: $pale-text;
+      padding: {
+        top: 20px;
+        bottom: 20px;
+      };
+      @media screen and (max-width: 768px) {
+        padding: {
+          top: 10px;
+          bottom: 10px;
+        };
       }
-      
-      &:hover {
-        background-color: $pale-text;
-      }
-    }
-    
-    &__buttons {
-      display: flex;
-      gap: 16px;
-      
-      button {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background-color: $pale-white;
-        cursor: pointer;
-        transition: all 0.2s ease;
+      &_meta {
         display: flex;
         align-items: center;
+        column-gap: 20px;
+        @media screen and (max-width: 768px) {
+          column-gap: 5px;
+        }
+      }
+      &__userreview {
+        @media screen and (max-width: 768px) {
+          max-width: 300px;
+        }
+        & p {
+          @include font(1rem, 800);
+          color: $pale-white;
+          @media screen and (max-width: 768px) {
+            font-size: .8rem;
+          }
+        }
+        & span {
+          @include font(.7rem, 800);
+          color: $second-text;
+          @media screen and (max-width: 768px) {
+            font-weight: 400;
+          }
+        }
+      }
+      &__rating {
+        @include font(1.5rem, 800);
+        color: $pale-white;
+      }
+      &__user {
+        width: 70px;
+        height: 70px;
+        background-color: rgba($white, 0.2);
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        @media screen and (max-width: 768px) {
+          width: 30px;
+          height: 30px;
+        }
+        & svg {
+          width: 70%;
+          height: 70%;
+        }
+      }
+    }
+  }
+  &__navigation {
+    width: 100%;
+    margin-top: 2rem;
+    &__template {
+      display: flex;
+      column-gap: 20px;
+      align-items: center;
+      @media screen and (max-width: 768px) {
+        width: 100%;
         justify-content: center;
-        
-        &:hover {
-          background-color: $pale-text;
-          
-          svg {
-            color: $white;
-          }
-        }
-        
-        &:disabled {
-          opacity: 0.4;
-          cursor: not-allowed;
-          
-          &:hover {
-            background-color: $pale-white;
-            
-            svg {
-              color: inherit;
-            }
-          }
-        }
-        
-        svg {
-          width: 20px;
-          height: 20px;
-          transition: color 0.2s ease;
-        }
+      }
+    }
+    &__buttons {
+      display: flex;
+      column-gap: 30px;
+      & button {
+        padding: 10px;
+        background-color: $pale-white;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+      & svg {
+        width: 20px;
+        height: 20px;
       }
     }
   }
 }
 
-// ============================================
-// АДАПТИВ
-// ============================================
-
-/* Планшеты (до 1024px) */
-@media (max-width: 1024px) {
-  .reviews__content {
-    gap: 20px;
-    padding: 0 30px;
-  }
-  
-  .reviews__content__item {
-    padding: 20px;
-  }
-  
-  .reviews__navigation__template {
-    width: 90%;
-  }
+.reviews__navigation__dots {
+  display: flex;
+  gap: 12px;
 }
 
-/* Телефоны и маленькие планшеты (до 768px) */
-@media (max-width: 768px) {
-  .reviews {
-    padding: 3rem 0;
-  }
-  
-  .reviews__title h2 {
-    font-size: 36px;
-  }
-  
-  .reviews__title p {
-    font-size: 14px;
-    padding: 0 20px;
-  }
-  
-  .reviews__content {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    padding: 0 20px;
-  }
-  
-  .reviews__content__item {
-    padding: 16px;
-  }
-  
-  .reviews__content__item__header__image {
-    width: 40px;
-    height: 40px;
-    
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-  
-  .reviews__content__item__header__name {
-    font-size: 14px;
-  }
-  
-  .reviews__content__item__header__rating {
-    font-size: 12px;
-  }
-  
-  .reviews__content__item__text {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  
-  .reviews__navigation__buttons button {
-    width: 38px;
-    height: 38px;
-  }
+.reviews__navigation__dot {
+  width: 10px;
+  height: 10px;
+  background-color: $pale-white;
+  border-radius: 10px;
+  transition: all 0.3s ease;
 }
 
-/* Маленькие телефоны (до 480px) */
-@media (max-width: 480px) {
-  .reviews {
-    padding: 2rem 0;
-  }
-  
-  .reviews__title h2 {
-    font-size: 28px;
-  }
-  
-  .reviews__title p {
-    font-size: 13px;
-  }
-  
-  .reviews__content {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 16px;
-  }
-  
-  .reviews__content__item {
-    padding: 16px;
-  }
-  
-  .reviews__navigation__template {
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .reviews__navigation__dots {
-    order: 2;
-  }
-  
-  .reviews__navigation__buttons {
-    order: 1;
-  }
+.active {
+  background-color: $pale-yellow;
+  width: 30px;
 }

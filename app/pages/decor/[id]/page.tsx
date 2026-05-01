@@ -91,32 +91,13 @@ const DecorPage = () => {
                 priority
               />
             </div>
-            
-            {hasMultipleImages && (
-              <div className="decor-page__gallery__thumbs">
-                {allImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    className={`decor-page__gallery__thumbs__item ${selectedImage === idx ? "active" : ""}`}
-                    onClick={() => setSelectedImage(idx)}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${decor.title} - вид ${idx + 1}`}
-                      width={80}
-                      height={80}
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           <div className="decor-page__info">
             <div className="decor-page__info__header">
               <h1>{decor.title}</h1>
               <div className="decor-page__info__price">
-                {decor.price} ₽ <span>/ шт</span>
+                <span>{decor.price} ₽/ шт</span>
               </div>
             </div>
 
@@ -140,12 +121,27 @@ const DecorPage = () => {
                 </ul>
               </div>
             )}
+            {hasMultipleImages && (
+              <div className="decor-page__gallery__thumbs">
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    className={`decor-page__gallery__thumbs__item ${selectedImage === idx ? "active" : ""}`}
+                    onClick={() => setSelectedImage(idx)}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${decor.title} - вид ${idx + 1}`}
+                      width={80}
+                      height={80}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
 
             <div className="decor-page__info__actions">
               <button className="order-button" onClick={() => setIsOrderOpen(true)}>Заказать</button>
-              <Link href="/pages/full-catalog" className="back-link">
-                ← Вернуться в каталог
-              </Link>
             </div>
           </div>
         </div>

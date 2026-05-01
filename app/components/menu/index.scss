@@ -13,7 +13,7 @@
   width: 100%;
   min-height: 80px;
   max-width: 1900px;
-  background-color: rgba($pale-blue, 0.8);
+  background-color: $main-text-2;
   backdrop-filter: blur(20px);
   border-bottom: solid 2px rgba($pale-text, 0.5);
   display: flex;
@@ -24,8 +24,8 @@
     right: 40px;
   };
   &__logotype {
-    @include font(24px, 700);
-    color: $main-text;
+    @include font(1.5rem, 800);
+    color: $pale-yellow;
   }
   &__content {
     display: flex;
@@ -35,18 +35,18 @@
       display: flex;
       column-gap: 20px;
       & a li {
-        @include font(16px, 500);
-        color: $pale-text;
+        @include font(1rem, 800);
+        color: $main-bg-2;
       }
     }
   }
   &__target button {
-    background-color: $pale-text;
-    width: 150px;
+    background-color: $main-bg-2;
+    width: 180px;
     height: 40px;
     border-radius: 4px;
-    @include font(14px, 500);
-    color: $white;
+    @include font(.9rem, 800);
+    color: $main-text-2;
     cursor: pointer;
   }
   &__separator {

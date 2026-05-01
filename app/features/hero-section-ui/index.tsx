@@ -1,4 +1,6 @@
 import ModalDetail from "@/app/share/modal-details/modalDetail"
+import ArrowRightIcon from "@/public/icons/arrowRight";
+import LinkIcon from "@/public/icons/link";
 import Link from "next/link"
 
 interface IHeroUiDataProps {
@@ -17,39 +19,36 @@ const HeroSectionUi = ({data, setIsModalOpen, isModalOpen}: IHeroSetionProps) =>
     <>
       <section id="hero-section">
         <div className="hero-section">
-          <div className="hero-section__content template">
-            <div className="hero-section__content__area">
-              <p>Скидки от 200 штук. Работаем по всей России.</p>
-              <h1>Наградные розетки высшего класса</h1>
+          <div className="hero-section__content">
+            <div className="hero-section__content__header">
               <span>Более 100 цветов атласной ленты. Индивидуальный дизайн. Срочное изготовление от 5 дней.</span>
-              <div className="hero-section__content__area__target-actions">
-                <Link 
-                href="/pages/full-catalog"
-                className="hero-section__content__area__target-actions__look-catalog-up">Смотреть каталог</Link>
-                <button className="hero-section__content__area__target-actions__relations">Связаться с нами</button>
+              <div className="hero-section__content__header__links">
+                <div className="hero-section__content__header__links__order">
+                  <Link href="#">Заказ</Link>
+                </div>
+                <div className="hero-section__content__header__links__relations">
+                  <Link href="#">Полный каталог</Link>
+                  <LinkIcon />
+                </div>
               </div>
+              <button onClick={() => setIsModalOpen(true)}>Открыть подробности</button>
             </div>
-          </div>
-          <div className="hero-section__image template">
-            <div className="hero-section__image__wrapper"></div>
-          </div>
-          <div className="hero-section__bottom-wrapper">
-            <div className="hero-section__bottom-wrapper__points">
+            <div className="hero-section__content__points">
               {data.map((item, index) => {
                 return (
-                  <div 
-                  key={index}
-                  className="hero-section__bottom-wrapper__points__item">
+                  <div className="hero-section__content__points__point" key={index}>
+                    <span>{item.description}</span>
                     <h2>{item.title}</h2>
-                    <p>{item.description}</p>
                   </div>
                 )
               })}
-              <button onClick={() => setIsModalOpen(true)}>Узнать детали</button>
+            </div>
+            <div className="hero-section__content__company-name">
+              <h1>Vivid Ribbon Award</h1>
+              <span>Наградные розетки <strong>высшего класса</strong></span>
             </div>
           </div>
         </div>
-        <div className="hero-section-footer"></div>
       </section>
       {isModalOpen && <ModalDetail onClose={() =>setIsModalOpen(false)} />}
     </>
