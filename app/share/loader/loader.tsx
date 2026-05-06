@@ -9,6 +9,7 @@ const LoaderComponent = () => {
   const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
   useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
   }, [pathname]);
 

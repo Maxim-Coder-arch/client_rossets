@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TemplateCards from "@/app/share/templateCards/templateCard";
-import SeriesCard from "@/app/share/series-card/seriesCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import ModalOrderProduct from "@/app/share/modal-order-products/modalOrderProduct";
 import { IProduct } from "@/types/product.type";

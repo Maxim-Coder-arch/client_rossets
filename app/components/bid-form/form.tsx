@@ -11,7 +11,7 @@ const BidForm = () => {
     socialLink: "",
     comment: "",
   });
-  const [agreed, setAgreed] = useState(false);
+  const [agreed, setAgreed] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 

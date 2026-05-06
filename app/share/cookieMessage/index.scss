@@ -1,0 +1,33 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
+
+.cookie-message {
+  position: fixed;
+  z-index: 1011;
+  right: 0;
+  bottom: 3rem;
+  display: flex;
+  align-items: center;
+  padding-right: 1rem;
+  &__block {
+    max-width: 300px;
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    background: $main-text;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+    & p {
+      @include font(1rem, 800);
+      color: $white;
+    }
+    & button {
+      @include font(1rem, 800);
+      width: fit-content;
+      background-color: $white;
+      color: $main-text-2;
+      cursor: pointer;
+      padding: 5px 20px;
+    }
+  }
+}

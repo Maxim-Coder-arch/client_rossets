@@ -1,23 +1,28 @@
-import { JSX } from "react"
-
-interface IContactsSectionUiDataProps {
-  icon: JSX.Element;
-  link: string;
-  label: string;
-}
-
+"use client";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import { IContactsSectionUiDataProps } from "@/types/contactsSectionUi.type";
 
 const ContactsSectionUi = ({ data }: { data: IContactsSectionUiDataProps[] }) => {
+  const parentReference = useRef(null);
+  const viewChild = useInView(parentReference, {once: true, amount: .5});
+
   return (
     <section id="contacts">
-      <div className="contacts">
+      <div className="contacts" ref={parentReference}>
         <div className="contacts__content">
           <div className="contacts__content__header">
             <h2>Свяжитесь с нами</h2>
             <p>Ответим на любые вопросы. Поможем подобрать дизайн. Рассчитаем стоимость за 15 минут.</p>
           </div>
           <div className="contacts__content__wrapper">
-            <div className="contacts__content__image"></div>
+            <motion.div className="contacts__content__image"
+            initial={{y: 100, opacity: 0}}
+            animate={viewChild ? { y: 0, opacity: 1 } : {}}
+            transition={{
+              duration: .5
+            }}
+            />
             <div className="contacts__content__wrapper__contact-block">
               {data.map((contact, index) => {
                   return (

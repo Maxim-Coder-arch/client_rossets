@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { ISeries } from "@/types/series.type";
-import "./index.scss";
 import { IDecor } from "@/types/decor.type";
 import MiniCatalogUi from "@/app/features/mini-catalog-ui";
+import "./index.scss";
 
 const MiniCatalog = () => {
   const [activeCategory, setActiveCategory] = useState<"ready" | "decor">("ready");

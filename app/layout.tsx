@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import LoaderComponent from "./share/loader/loader";
 import { Tracker } from "./share/tracker/tracker";
 import Breadcrumbs from "./share/crumbs/crumbs";
+import CookieMessage from "./share/cookieMessage/cookieMessage";
 
 
 export const metadata: Metadata = {
@@ -17,10 +18,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body>
         <LoaderComponent />
         {children}
+        <CookieMessage />
         <Footer />
         <Breadcrumbs />
         <Tracker />

@@ -1,4 +1,3 @@
-// components/ui/Breadcrumbs.tsx
 "use client";
 
 import Link from "next/link";

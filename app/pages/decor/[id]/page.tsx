@@ -1,4 +1,3 @@
-// app/pages/decor/[id]/page.tsx
 "use client";
 
 import { useParams } from "next/navigation";

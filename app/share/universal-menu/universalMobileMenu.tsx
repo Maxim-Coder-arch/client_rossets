@@ -1,16 +1,8 @@
 'use client';
-import "./index.scss";
+import { UniversalMenuProps } from "@/types/universalMenuProps.type";
 import Link from "next/link";
 import { useState } from "react";
-
-interface ILogicUniversalMenu {
-  label: string;
-  link: string;
-}
-
-interface UniversalMenuProps {
-  data: ILogicUniversalMenu[];
-}
+import "./index.scss";
 
 const UniversalMobileMenu = ({ data }: UniversalMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);

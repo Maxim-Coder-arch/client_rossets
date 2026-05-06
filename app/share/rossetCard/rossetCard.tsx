@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { IProduct } from "@/types/product.type";
-import "./index.scss";
 import LinkIcon from "@/public/icons/link";
+import "./index.scss";
 
 const RossetCard = (props: IProduct) => {
   const {

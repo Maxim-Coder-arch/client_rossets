@@ -1,19 +1,7 @@
 import ArrowLeftIcon from "@/public/icons/arrowLeft"
 import ArrowRightIcon from "@/public/icons/arrowRight"
 import UserIcon from "@/public/icons/user"
-import { IReview } from "@/types/reviews.type";
-
-interface IReviewsSectionUiProps {
-  handleTouchStart: React.TouchEventHandler<HTMLDivElement>;
-  handleTouchMove: React.TouchEventHandler<HTMLDivElement>;
-  handleTouchEnd: React.TouchEventHandler<HTMLDivElement>;
-  goToNext: () => void;
-  goToPrev: () => void;
-  goToPage: (idx: number) => void;
-  currentIndex: number;
-  totalPages: number;
-  currentReviews: IReview[];
-}
+import { IReviewsSectionUiProps } from "@/types/reviewsSectionUi.type";
 
 const ReviewsSectionUi = ({ 
   handleTouchStart, 

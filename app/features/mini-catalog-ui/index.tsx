@@ -1,15 +1,7 @@
 import SeriesCard from "@/app/common/series-card";
 import DecorCard from "@/app/share/decorCard/decorCard";
-import { IDecor } from "@/types/decor.type";
-import { ISeries } from "@/types/series.type"
+import { IMiniCatalogUiProps } from "@/types/miniCatalogSectionUi.type";
 import Link from "next/link"
-
-interface IMiniCatalogUiProps {
-  seriesData: ISeries[];
-  decorsData: IDecor[];
-  activeCategory: "ready" | "decor";
-  setActiveCategory: React.Dispatch<React.SetStateAction<"ready" | "decor">>;
-}
 
 const MiniCatalogUi = ({ seriesData, decorsData, activeCategory, setActiveCategory }: IMiniCatalogUiProps) => {
   return (

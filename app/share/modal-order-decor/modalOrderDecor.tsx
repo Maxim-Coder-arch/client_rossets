@@ -2,13 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { IDecor } from "@/types/decor.type";
+import { ModalOrderDecorProps } from "@/types/modalOrderDecorProps.type";
 import "./index.scss";
-
-interface ModalOrderDecorProps {
-  product: IDecor;
-  onClose: () => void;
-}
 
 const ModalOrderDecor = ({ product, onClose }: ModalOrderDecorProps) => {
   const [formData, setFormData] = useState({

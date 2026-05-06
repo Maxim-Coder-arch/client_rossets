@@ -1,18 +1,17 @@
 'use client';
 
-// import SeriesCard from "@/app/share/series-card/seriesCard";
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ISeries } from "@/types/series.type";
 import { IDecor } from "@/types/decor.type";
-import "./index.scss";
 import Link from "next/link";
 import ArrowRightIcon from "@/public/icons/arrowRight";
 import { animate, motion, useMotionValue } from "framer-motion";
 import ArrowLeftIcon from "@/public/icons/arrowLeft";
 import { useMemo } from "react";
+import "./index.scss";
 
 const dataLogicMenu = [
   {
@@ -104,23 +103,21 @@ const FullCatalog = () => {
     );
   }, [seriesData, searchQuery]);
 
-  // Сортировка отфильтрованных серий
   const sortedFilteredSeries = useMemo(() => {
     return getSortedSeries(filteredSeries, sortType);
   }, [filteredSeries, sortType]);
 
-  // Обновление видимых серий (пагинация)
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setVisibleSeries(sortedFilteredSeries.slice(0, seriesLimit));
   }, [sortedFilteredSeries, seriesLimit]);
 
-  // Сброс при поиске
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSeriesLimit(10);
     setSortType("default");
   }, [searchQuery]);
 
-  // Пагинация декоров
   const goToNext = () => {
     if (currentPage < totalPages - 1) {
       setCurrentPage(currentPage + 1);

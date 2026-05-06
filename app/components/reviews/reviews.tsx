@@ -2,8 +2,8 @@
 
 import { IReview } from "@/types/reviews.type";
 import { useState, useEffect } from "react";
-import "./index.scss";
 import ReviewsSectionUi from "@/app/features/reviews-section-ui";
+import "./index.scss";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<IReview[]>([]);

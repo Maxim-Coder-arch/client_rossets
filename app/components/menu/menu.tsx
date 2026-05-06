@@ -1,9 +1,9 @@
 'use client';
 
 import { dataMenu } from "@/data/menu.data";
-import "./index.scss";
 import { motion, useMotionValue, animate } from "framer-motion";
 import { useRef, useEffect } from "react";
+import "./index.scss";
 
 const Menu = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -24,7 +24,6 @@ const Menu = () => {
 
   return (
     <nav className="navigation">
-      {/* Бегущий баннер */}
       <div className="navigation__banner">
         <div className="full-calalog__content__banner">
           <motion.div 
