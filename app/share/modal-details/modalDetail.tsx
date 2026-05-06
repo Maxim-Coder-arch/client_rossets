@@ -1,11 +1,27 @@
 import CloseIcon from "@/public/icons/close";
 import { modalDetailData as modalData } from "@/data/modalDetail.data";
+import { motion } from "framer-motion";
 import "./index.scss";
 
 const ModalDetail = ({ onClose }: { onClose: () => void }) => {
   return (
-    <div className="modal-detail">
-      <div className="modal-detail__frame">
+    <motion.div 
+    initial={{opacity: 0}}
+    animate={{opacity: 1}}
+    className="modal-detail">
+      <motion.div 
+      initial={{
+        opacity: 0,
+        x: "100%"
+      }}
+      animate={{
+        opacity: 1,
+        x: 0
+      }}
+      transition={{
+        ease: "easeInOut"
+      }}
+      className="modal-detail__frame">
         <div className="modal-detail__frame__header">
           <div className="modal-detail__frame__header__contact">
             Мы может ответить на ваши вопросы: <a href="https://vk.com/vividribbon">Напишите нам</a>
@@ -40,8 +56,8 @@ const ModalDetail = ({ onClose }: { onClose: () => void }) => {
             </div>
           </div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

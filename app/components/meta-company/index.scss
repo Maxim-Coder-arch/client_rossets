@@ -1,185 +1,122 @@
 @use "../../global_styles/colors/colors.scss" as *;
 @use "../../global_styles/mixins/mixins.scss" as *;
 
+
 .meta-company {
-  width: 100%;
+  width: 100vw;
+  background-color: $main-bg-2;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 4rem;
-  row-gap: 3rem;
-  background-color: $white;
-  
-  &__title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 3rem;
-    width: 100%;
-    
-    & h2 {
-      @include font(48px, 500);
-      color: $pale-text;
-      
-      // небольшое улучшение для десктопа
-      text-align: center;
-      max-width: 800px;
-    }
-    
-    & p {
-      @include font(18px, 400);
-      color: $main-text;
-      max-width: 500px;
-      line-height: 150%;
-      text-align: center;
-    }
-  }
-  
+  justify-content: center;
+  padding: {
+    top: 3rem;
+  };
   &__content {
+    width: 90%;
+    border-radius: 20px;
     display: flex;
-    justify-content: center;
-    width: 100%;
-    column-gap: calc((100% / 3) - 200px);
-    
-    &__item {
+    background-color: $main-text-2;
+    padding: {
+      left: 20px;
+      right: 20px;
+      top: 3rem;
+      bottom: 3rem;
+    };
+    @media screen and (max-width: 1000px) {
+      flex-direction: column;
+      row-gap: 20px;
+      padding: {
+        left: 10px;
+        right: 10px;
+        top: 2rem;
+        bottom: 2rem;
+      };
+    }
+    &__title {
+      width: 50%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      row-gap: 20px;
-      
-      &__label {
-        width: 206px;
-        height: 206px;
-        display: grid;
-        place-items: center;
-        background-color: rgba($pale-text, 0.2);
-        border-radius: 30px;
-        @include font(46px, 800);
-        color: $pale-text;
-        
-        // улучшение: плавный переход при ховере
-        transition: all 0.3s ease;
-        
-        &:hover {
-          transform: scale(1.02);
-          background-color: rgba($pale-text, 0.3);
+      text-align: right;
+      align-items: flex-end;
+      row-gap: 2rem;
+      padding-right: 2rem;
+      @media screen and (max-width: 1000px) {
+        text-align: left;
+        width: 100%;
+        row-gap: 10px;
+      }
+      & h2 {
+        @include font(2rem, 800);
+        line-height: 30px;
+        color: $white;
+        @media screen and (max-width: 1000px) {
+          text-align: left;
+          width: 100%;
+          font-size: 1.5rem;
         }
       }
-      
       & p {
-        text-align: center;
-        max-width: 200px;
-        color: $main-text;
-        @include font(14px, 400);
+        @include font(1rem, 800);
+        color: $pale-white;
+        @media screen and (max-width: 1000px) {
+          font-size: .9rem;
+        }
       }
     }
-  }
-}
-
-// ============================================
-// АДАПТИВ ДЛЯ META COMPANY
-// ============================================
-
-/* Планшеты (до 1024px) */
-@media (max-width: 1024px) {
-  .meta-company {
-    padding-top: 3rem;
-    row-gap: 2rem;
-  }
-  
-  .meta-company__title h2 {
-    font-size: 36px;
-    max-width: 90%;
-  }
-  
-  .meta-company__title p {
-    font-size: 16px;
-    max-width: 80%;
-  }
-  
-  .meta-company__content {
-    column-gap: 60px;
-  }
-  
-  .meta-company__content__item__label {
-    width: 160px;
-    height: 160px;
-    font-size: 36px;
-    border-radius: 24px;
-  }
-  
-  .meta-company__content__item p {
-    max-width: 180px;
-    font-size: 13px;
-  }
-}
-
-/* Телефоны горизонтально (до 768px) */
-@media (max-width: 768px) {
-  .meta-company {
-    padding: 3rem 20px;
-    row-gap: 2rem;
-    &__content {
-      &__item {
+    &__cards {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      width: 50%;
+      row-gap: 1rem;
+      @media screen and (max-width: 1000px) {
+        align-items: center;
+        row-gap: 5px;
         width: 100%;
       }
+      &__card {
+        width: 100%;
+        padding: {
+          top: 10px;
+          bottom: 10px;
+          left: 1rem;
+          right: 1rem;
+        };
+        transition: all 0.3s ease;
+        &:hover {
+          transform: translateX(-50px) scale(1.1);
+          @media screen and (max-width: 768px) {
+            transform: none;
+          }
+        }
+        @media screen and (max-width: 1000px) {
+            padding: {
+            top: 10px;
+            bottom: 10px;
+            left: 5px;
+            right: 5px;
+          };
+        }
+        background-color: $main-bg-2;
+        border-radius: 20px;
+        &__header {
+          @include font(4rem, 800);
+          color: $main-text-2;
+          @media screen and (max-width: 1000px) {
+            font-size: 2.3rem;
+          }
+        }
+        &__content {
+          @include font(1rem, 800);
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          color: $second-text;
+          @media screen and (max-width: 1000px) {
+            font-size: .9rem;
+            text-align: right;
+          }
+        }
+      }
     }
-  }
-  
-  .meta-company__title h2 {
-    font-size: 28px;
-  }
-  
-  .meta-company__title p {
-    font-size: 14px;
-    max-width: 90%;
-  }
-  
-  .meta-company__content {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
-  }
-  
-  .meta-company__content__item__label {
-    width: 100%;
-    height: 140px;
-    font-size: 32px;
-    border-radius: 20px;
-  }
-  
-  .meta-company__content__item p {
-    max-width: 200px;
-  }
-}
-
-/* Маленькие телефоны (до 480px) */
-@media (max-width: 480px) {
-  .meta-company {
-    padding: 2rem 16px;
-  }
-  
-  .meta-company__title h2 {
-    font-size: 24px;
-    row-gap: 1.5rem;
-  }
-  
-  .meta-company__title p {
-    font-size: 13px;
-  }
-  
-  .meta-company__content {
-    gap: 30px;
-  }
-  
-  .meta-company__content__item__label {
-    height: 120px;
-    font-size: 28px;
-    border-radius: 16px;
-  }
-  
-  .meta-company__content__item p {
-    font-size: 12px;
-    max-width: 180px;
   }
 }

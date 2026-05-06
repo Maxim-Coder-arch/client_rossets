@@ -4,12 +4,11 @@
 .footer {
   width: 100%;
   min-height: 480px;
-  background-color: $card;
+  background-color: $main-text-2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 5rem;
   padding: {
     left: 50px;
     right: 50px;
@@ -27,45 +26,34 @@
     &__target {
       display: flex;
       flex-direction: column;
-      row-gap: 20px;
+      row-gap: 10px;
       
       &__logotype {
-        color: $main-text;
-        @include font(32px, 600);
+        color: $main-bg-2;
+        @include font(3rem, 800);
       }
       
       &__text {
         max-width: 300px;
-        color: $main-text;
-        @include font(16px, 400);
+        color: $main-bg-2;
+        @include font(16px, 700);
       }
       
       &__contacts {
         display: flex;
         column-gap: 30px;
-        
+        margin-top: 2rem;
         &__contact {
-          background-color: $white;
-          padding: 7px;
           border-radius: 50%;
           transition: all 0.2s ease;
           display: flex;
           align-items: center;
           justify-content: center;
           
-          &:hover {
-            transform: translateY(-3px);
-            background-color: $pale-text;
-            
-            svg {
-              color: $white;
-            }
-          }
-          
           svg {
-            width: 24px;
-            height: 24px;
-            transition: color 0.2s ease;
+            width: 40px;
+            height: 40px;
+            color: $pale-yellow;
           }
         }
       }
@@ -83,16 +71,8 @@
     justify-content: space-between;
     padding-top: 2rem;
     max-width: 1900px;
-    
-    a {
-      color: $main-text;
-      text-decoration: none;
-      transition: color 0.2s ease;
-      
-      &:hover {
-        color: $pale-text;
-      }
-    }
+    @include font(.9rem, 700);
+    color: $main-bg-2;
   }
 }
 
@@ -102,8 +82,8 @@
   row-gap: 20px;
   
   &__title {
-    @include font(20px, 400);
-    color: $main-text;
+    @include font(2rem, 800);
+    color: $pale-yellow;
   }
   
   ul {
@@ -117,13 +97,9 @@
       
       li {
         list-style: none;
-        color: $second-text;
-        @include font(14px, 400);
+        color: $main-bg-2;
+        @include font(1rem, 700);
         transition: color 0.2s ease;
-      }
-      
-      &:hover li {
-        color: $pale-text;
       }
     }
   }

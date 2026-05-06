@@ -5,12 +5,12 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import TemplateCards from "@/app/share/templateCards/templateCard";
-import SeriesCard from "@/app/share/series-card/seriesCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
 import ModalOrderProduct from "@/app/share/modal-order-products/modalOrderProduct";
 import { IProduct } from "@/types/product.type";
 import "./index.scss";
 import { ISeries } from "@/types/series.type";
+import { SeriesCardDesign } from "../../full-catalog/page";
 
 const ProductPage = () => {
   const params = useParams();
@@ -112,25 +112,6 @@ const ProductPage = () => {
                 priority
               />
             </div>
-            
-            {hasMultipleImages && (
-              <div className="product-page__gallery__thumbs">
-                {allImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    className={`product-page__gallery__thumbs__item ${selectedImage === idx ? 'active' : ''}`}
-                    onClick={() => setSelectedImage(idx)}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${product.seriesNumber} - вид ${idx + 1}`}
-                      width={80}
-                      height={80}
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
           
           <div className="product-page__info">
@@ -159,6 +140,24 @@ const ProductPage = () => {
                   <strong>{product.tailLength} см</strong>
                 </li>
               </ul>
+              {hasMultipleImages && (
+              <div className="product-page__gallery__thumbs">
+                {allImages.map((img, idx) => (
+                  <button
+                    key={idx}
+                    className={`product-page__gallery__thumbs__item ${selectedImage === idx ? 'active' : ''}`}
+                    onClick={() => setSelectedImage(idx)}
+                  >
+                    <Image
+                      src={img}
+                      alt={`${product.seriesNumber} - вид ${idx + 1}`}
+                      width={80}
+                      height={80}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
             </div>
             
             {product.comment && (
@@ -181,7 +180,7 @@ const ProductPage = () => {
           <h5>Смотрите также</h5>
           <TemplateCards>
             {otherSeries.map((other) => (
-              <SeriesCard product={other} key={other._id} />
+              <SeriesCardDesign product={other} key={other._id} />
             ))}
           </TemplateCards>
         </div>

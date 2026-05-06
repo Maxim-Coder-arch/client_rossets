@@ -1,19 +1,18 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import Lottie from 'lottie-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Loader from "../../../public/animations/loader.json";
 import "./index.scss";
 
 const LoaderComponent = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const pathname = usePathname();
-
-  useEffect(() => {
+  useLayoutEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
   }, [pathname]);
+
   useEffect(() => {
     if (!isLoading) return;
     
@@ -22,29 +21,53 @@ const LoaderComponent = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [isLoading]);
+  }, [isLoading, pathname]);
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isLoading && (
-        <motion.div
-          className="rocket-loader-overlay"
+        <motion.div 
+          className="loader-component"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          transition={{ duration: 0.2 }}
         >
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, ease: "linear" }}
-            className="rocket-loader-container"
-          >
-            <Lottie
-              animationData={Loader}
-              loop={false}
-              style={{ width: "100%", height: "100%" }}
-            />
-          </motion.div>
+          <div className="loader-component__block-1">
+            {Array.from({length: 5}).map((_, index) => (
+              <motion.div 
+                key={index}
+                className="loader-component__item-variation-1"
+                initial={{ height: 0 }}
+                animate={{ 
+                  height: ["0%", "100%", "100%", "0%"],
+                }}
+                transition={{
+                  delay: index * 0.1,
+                  duration: 0.6,
+                  times: [0, 0.4, 0.6, 1],
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </div>
+          <div className="loader-component__block-2">
+            {Array.from({length: 5}).map((_, index) => (
+              <motion.div 
+                key={index}
+                className="loader-component__item-variation-2"
+                initial={{ height: 0 }}
+                animate={{ 
+                  height: ["0%", "100%", "100%", "0%"],
+                }}
+                transition={{
+                  delay: index * 0.1,
+                  duration: 0.6,
+                  times: [0, 0.4, 0.6, 1],
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

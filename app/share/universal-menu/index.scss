@@ -13,7 +13,7 @@
   width: 100%;
   min-height: 80px;
   max-width: 1900px;
-  background-color: rgba($pale-blue, 0.8);
+  background-color: $main-text-2;
   backdrop-filter: blur(20px);
   border-bottom: solid 2px rgba($pale-text, 0.5);
   display: flex;
@@ -24,8 +24,8 @@
     right: 40px;
   };
   &__logotype {
-    @include font(24px, 700);
-    color: $main-text;
+    @include font(1.5rem, 800);
+    color: $pale-yellow;
   }
   &__content {
     display: flex;
@@ -35,18 +35,18 @@
       display: flex;
       column-gap: 20px;
       & a li {
-        @include font(16px, 500);
-        color: $pale-text;
+        @include font(1rem, 800);
+        color: $main-bg-2;
       }
     }
   }
   &__target button {
-    background-color: $pale-text;
-    width: 150px;
+    background-color: $main-bg-2;
+    width: 180px;
     height: 40px;
     border-radius: 4px;
-    @include font(14px, 500);
-    color: $white;
+    @include font(.9rem, 800);
+    color: $main-text-2;
     cursor: pointer;
   }
   &__separator {
@@ -63,94 +63,109 @@
 
 
 
+// mobile-menu.scss
 .mobile-menu {
   position: fixed;
-  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1001;
-  height: 40px;
-  background-color: $white;
+  height: 60px;
+  background-color: $main-text-2;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: {
-    right: 20px;
-    left: 20px;
-  };
+  padding: 0 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  
   &__logotype {
-    @include font(18px, 700);
-    color: $pale-text;
+    @include font(20px, 800);
+    color: $pale-yellow;
+    letter-spacing: -0.5px;
   }
+  
   &__button {
-    width: 30px;
-    height: 15px;
+    width: 44px;
+    height: 44px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    
     &__item {
-      width: 100%;
+      width: 28px;
       height: 3px;
-      background-color: $pale-text;
-      border-radius: 3px;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      background-color: $pale-yellow;
+      border-radius: 4px;
+      transition: all 0.25s ease;
     }
   }
 }
 
-
 .mobile-modal {
-  width: 100%;
   position: fixed;
-  z-index: 1000;
-  height: calc(100vh - 40px);
   bottom: 0;
-  left: 0;
-  background-color: rgba($white, 0.5);
+  z-index: 1000;
+  width: 100%;
+  background-color: $main-text-2;
   backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+  animation: slideIn 0.3s ease;
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+  
   &__points {
-    height: 70%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 40px 20px;
     
     ul {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      row-gap: 32px;
+      align-items: flex-end;
+      gap: 28px;
+      width: 100%;
       padding: 0;
       margin: 0;
       
       a {
         text-decoration: none;
+        display: block;
+        width: 100%;
+        text-align: right;
         
         li {
           list-style: none;
-          @include font(24px, 500);
-          color: $main-text;
-          text-align: center;
-          padding: 8px 16px;
+          @include font(28px, 800);
+          color: $main-bg-2;
+          text-align: right;
+          padding: 8px 0;
           transition: all 0.2s ease;
-          position: relative;
+          letter-spacing: -0.5px;
           
-          &::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 2px;
-            background-color: $pale-text;
-            transition: width 0.2s ease;
+          @media (max-width: 480px) {
+            font-size: 22px;
           }
           
           &:hover {
-            color: $pale-text;
-            
-            &::after {
-              width: 80%;
-            }
+            color: $pale-yellow;
+            transform: translateX(-8px);
           }
         }
       }
@@ -158,36 +173,38 @@
   }
   
   &__footer {
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    right: 0;
+    padding: 30px 24px 40px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     gap: 16px;
-    padding: 20px;
+    border-top: 1px solid rgba($main-bg-2, 0.1);
     
     a {
-      @include font(14px, 400);
-      color: $second-text;
+      @include font(14px, 700);
+      color: rgba($main-bg-2, 0.7);
       text-decoration: none;
-      transition: color 0.2s ease;
+      transition: all 0.2s ease;
+      letter-spacing: 0.3px;
       
       &:hover {
-        color: $pale-text;
+        color: $pale-yellow;
+        transform: translateX(-4px);
       }
     }
   }
 }
 
+// Анимация бургера
 .active-0 {
-  transform: rotate(45deg) translateX(5px) translateY(6px);
+  transform: rotate(45deg) translate(5px, 6px);
 }
+
 .active-1 {
-  transform: translateX(-100px);
   opacity: 0;
+  transform: translateX(-20px);
 }
+
 .active-2 {
-  transform: rotate(-45deg) translateX(1px) translateY(-3px);
+  transform: rotate(-45deg) translate(5px, -6px);
 }

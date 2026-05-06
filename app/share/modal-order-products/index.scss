@@ -8,36 +8,41 @@
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: rgba($white, 0.6);
-  backdrop-filter: blur(15px);
+  background-color: rgba($main-text-2, 0.95);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 0.2s ease;
+  animation: fadeIn 0.3s ease;
   
   &__content {
     position: relative;
-    max-width: 500px;
+    max-width: 520px;
     width: 90%;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
-    background: $white;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    background: $main-text-2;
+    border-radius: 32px;
+    padding: 28px 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba($pale-yellow, 0.2);
     animation: slideUp 0.3s ease;
     
+    @media (max-width: 480px) {
+      padding: 20px 16px;
+    }
+    
     &::-webkit-scrollbar {
-      width: 6px;
+      width: 4px;
     }
     
     &::-webkit-scrollbar-track {
-      background: $pale-white;
+      background: $pale-white-3;
       border-radius: 10px;
     }
     
     &::-webkit-scrollbar-thumb {
-      background: $pale-grey;
+      background: $pale-yellow;
       border-radius: 10px;
     }
   }
@@ -46,31 +51,47 @@
     position: absolute;
     top: 16px;
     right: 20px;
-    background: none;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba($main-bg-2, 0.1);
     border: none;
-    font-size: 24px;
+    border-radius: 50%;
+    font-size: 18px;
     cursor: pointer;
-    color: $second-text;
-    transition: color 0.2s;
+    color: $main-bg-2;
+    transition: all 0.2s;
     
     &:hover {
-      color: $main-text;
+      background: $pale-yellow;
+      color: $main-text-2;
     }
   }
   
   &__product {
     display: flex;
-    gap: 16px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba($pale-text, 0.2);
+    gap: 20px;
+    padding: 20px;
+    background: rgba($main-bg-2, 0.05);
+    border-radius: 24px;
+    margin-bottom: 24px;
+    border: 1px solid rgba($main-bg-2, 0.1);
+    
+    @media (max-width: 480px) {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
     
     &__image {
       flex-shrink: 0;
       width: 100px;
       height: 100px;
-      background: $pale-white-3;
-      border-radius: 12px;
+      background: $main-bg-2;
+      border-radius: 16px;
       overflow: hidden;
       
       img {
@@ -84,68 +105,74 @@
       flex: 1;
       
       h3 {
-        @include font(18px, 600);
-        color: $main-text;
-        margin-bottom: 4px;
-      }
-      
-      p {
-        @include font(13px, 400);
-        color: $second-text;
+        @include font(20px, 800);
+        color: $pale-yellow;
         margin-bottom: 8px;
+        letter-spacing: -0.3px;
+        
+        @media (max-width: 480px) {
+          font-size: 18px;
+        }
+      }
+      & p {
+        @include font(15px, 800);
+        color: $main-bg-2;
+        margin-bottom: 8px;
+        letter-spacing: -0.3px;
       }
       
       .product-details {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-bottom: 8px;
+        gap: 12px;
+        margin-bottom: 12px;
         
         span {
-          @include font(11px, 400);
-          color: $second-text;
+          @include font(12px, 600);
+          color: rgba($main-bg-2, 0.6);
+          background: rgba($main-bg-2, 0.1);
+          padding: 4px 10px;
+          border-radius: 20px;
         }
       }
       
       .product-price {
-        @include font(20px, 700);
-        color: $pale-text;
+        @include font(22px, 800);
+        color: $pale-yellow;
         
-        &::after {
-          content: " ₽";
-          @include font(12px, 400);
-          color: $second-text;
-        }
       }
     }
   }
   
   &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    
     .form-group {
-      margin-bottom: 16px;
-      
       input, textarea {
         width: 100%;
-        padding: 12px 16px;
-        border: 1px solid rgba($pale-text, 0.2);
-        border-radius: 12px;
-        @include font(14px, 400);
-        color: $main-text;
-        background: $white;
+        padding: 14px 18px;
+        background: rgba($main-bg-2, 0.08);
+        border: 1px solid rgba($main-bg-2, 0.15);
+        border-radius: 16px;
+        @include font(14px, 500);
+        color: $main-bg-2;
         transition: all 0.2s;
         
         &:focus {
           outline: none;
-          border-color: $pale-text;
-          box-shadow: 0 0 0 3px rgba($pale-text, 0.1);
+          border-color: $pale-yellow;
+          background: rgba($main-bg-2, 0.12);
         }
         
         &::placeholder {
-          color: $second-text;
+          color: rgba($main-bg-2, 0.4);
+          font-weight: 400;
         }
         
         &:disabled {
-          background: $pale-white-3;
+          opacity: 0.5;
           cursor: not-allowed;
         }
       }
@@ -157,27 +184,31 @@
     }
     
     .form-message {
-      padding: 12px;
-      border-radius: 10px;
-      @include font(13px, 400);
+      padding: 12px 16px;
+      border-radius: 14px;
+      @include font(13px, 600);
       text-align: center;
-      margin-bottom: 16px;
+      margin-bottom: 4px;
+      
+
     }
     
     .submit-btn {
       width: 100%;
       padding: 14px;
-      background: $pale-text;
-      color: $white;
+      background: $pale-yellow;
       border: none;
       border-radius: 40px;
-      @include font(16px, 600);
+      @include font(16px, 800);
+      color: $main-text-2;
       cursor: pointer;
       transition: all 0.2s;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
       
       &:hover {
-        background: darken($pale-text, 10%);
         transform: translateY(-2px);
+        background: darken($pale-yellow, 8%);
       }
       
       &:disabled {
@@ -197,7 +228,7 @@
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;

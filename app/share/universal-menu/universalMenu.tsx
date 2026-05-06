@@ -1,13 +1,5 @@
+import { UniversalMenuProps } from "@/types/universalMenuProps.type";
 import "./index.scss";
-
-interface ILogicUniversalMenu {
-  label: string;
-  link: string;
-}
-
-interface UniversalMenuProps {
-  data: ILogicUniversalMenu[];
-}
 
 const UniversalMenu = ({ data }: UniversalMenuProps) => {
   return (

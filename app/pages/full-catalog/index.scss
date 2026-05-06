@@ -1,43 +1,473 @@
+@use "../../global_styles/colors/colors.scss" as *;
+@use "../../global_styles/mixins/mixins.scss" as *;
 
-.full-catalog {
-  padding-top: 100px;
-  width: 100vw;
+.series-card-design {
+  height: 500px;
+  background: $main-text-2;
+  border-radius: 20px;
+  padding: 20px;
+  max-height: 300px;
   display: flex;
-  justify-content: center;
-  &__wrapper {
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $main-text;
+  }
+
+  &__series-name {
+    display: flex;
+    & h3 {
+      @include font(1.2rem, 800);
+      color: $main-bg-2;
+    }
+    & svg {
+      width: 30px;
+      height: 30px;
+      color: $pale-yellow;
+    }
+  }
+  &__image {
     width: 100%;
-    max-width: 1900px;
-    padding: {
-      left: 30px;
-      right: 30px;
-    };
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    & span {
+      position: absolute;
+      left: 0;
+      top: 20px;
+      rotate: 90deg;
+      @include font(14px, 800);
+      background-color: $pale-yellow;
+      padding: 2px 10px;
+      color: $main-text-2;
+    }
+    &__wrapper {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      border-radius: 20px;
+      overflow: hidden;
+      & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
-.decors-block {
-  width: 100%;
-  height: 400px;
-  margin-top: 100px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.link-decor-card {
+  display: block;
+  height: 350px;
+  min-width: calc(100% / 2);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.decor-card {
+  background-color: $main-bg-2;
+  border-radius: 20px;
+  padding: 20px;
   display: flex;
-  column-gap: 20px;
-  overflow-y: auto;
-  padding: {
-    top: 20px;
-    bottom: 20px;
-    right: 20px;
-    left: 20px;
-  };
-  &::-webkit-scrollbar {
-    display: block;
-    height: 15px;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: $main-text;
+    .decor-card__content h3, p {
+      color: $white;
+    }
+    .decor-card__image {
+      &__wrapper {
+        width: 300px;
+      }
+    }
+  }
+
+  &__image {
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    background: transparent;
+
+    span {
+      position: absolute;
+      left: 0;
+      top: 50px;
+      transform: rotate(-90deg);
+      background-color: $main-text-2;
+      color: $main-bg-2;
+      padding: 6px 20px;
+      @include font(12px, 800);
+      z-index: 2;
+    }
+
+    &__wrapper {
+      transition: all 0.3s ease;
+      width: 260px;
+      height: 180px;
+      border-radius: 20px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+    }
   }
-  &::-webkit-scrollbar-track {
-    border-radius: 10px;
+
+  &__content {
+    margin-top: 24px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    h3 {
+      @include font(2rem, 800);
+      color: $main-text-2;
+    }
+    & p {
+      @include font(1rem, 800);
+      color: $second-text;
+    }
   }
-  &::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    border: 3px solid transparent;
-    background-clip: content-box;
+}
+
+
+
+
+
+
+
+
+
+
+.full-catalog__filteres {
+  width: 320px;
+  flex-shrink: 0;
+  background: $main-text-2;
+  border-radius: 0 32px 32px 0;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 24px 16px;
+  box-shadow: 8px 0 25px -15px rgba(0, 0, 0, 0.3);
+  @media screen and (max-width: 968px) {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  // ===== ЗАГОЛОВОК =====
+  &__title h2 {
+    @include font(28px, 800);
+    color: $pale-yellow;
+    letter-spacing: -0.5px;
+    border-left: 4px solid $pale-yellow;
+    padding-left: 16px;
+    margin: 0 0 8px 0;
+  }
+
+  // ===== ПОИСК =====
+  input[type="text"] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    @include font(14px, 600);
+    color: $main-bg-2;
+    padding: 12px 16px;
+    border-radius: 40px;
+    transition: all 0.2s;
+
+    &::placeholder {
+      color: rgba($main-bg-2, 0.4);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $pale-yellow;
+      background: rgba(255, 255, 255, 0.08);
+    }
+  }
+
+  // ===== СОРТИРОВКА =====
+  &__buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    h3 {
+      @include font(14px, 700);
+      color: $main-bg-2;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+
+    &__container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      button {
+        background: transparent;
+        border: 1px solid rgba($pale-yellow, 0.5);
+        @include font(12px, 700);
+        color: $pale-yellow;
+        padding: 6px 14px;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-transform: uppercase;
+
+        &:hover {
+          background: $pale-yellow;
+          color: $main-text-2;
+          border-color: $pale-yellow;
+        }
+      }
+    }
+  }
+
+  // ===== ОБЩИЙ СТИЛЬ ДЛЯ БЛОКОВ СЕРИЙ И ДЕКОРОВ =====
+  &__all-series,
+  &__all-decors {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    h3 {
+      @include font(16px, 800);
+      color: $pale-yellow;
+      letter-spacing: -0.3px;
+      margin: 0;
+      border-bottom: 2px solid rgba($pale-yellow, 0.3);
+      display: inline-block;
+      width: fit-content;
+      padding-bottom: 4px;
+    }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      @media screen and (max-width: 968px) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        max-height: 400px;
+      }
+
+      a {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.1s;
+        @media screen and (max-width: 968px) {
+          width: fit-content;
+        }
+
+        li {
+          @include font(14px, 600);
+          color: $main-bg-2;
+          padding: 8px 12px;
+          border-radius: 16px;
+          background: rgba(255, 255, 255, 0.02);
+          transition: all 0.2s;
+          @media screen and (max-width: 968px) {
+            font-weight: 400;
+            font-size: .8rem;
+          }
+        }
+
+        &:hover li {
+          background: $pale-yellow;
+          color: $main-text-2;
+          transform: translateX(6px);
+        }
+      }
+    }
+  }
+}
+
+.active-filter {
+  background: $pale-yellow !important;
+  color: $main-text-2 !important;
+}
+
+.load-more {
+  width: 100%;
+  background: $main-text-2;
+  padding: 8px 12px;
+  @include font(3rem, 600);
+  color: $pale-yellow;
+  border-radius: 20px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.full-calalog {
+  width: 100vw;
+  display: flex;
+  background-color: $main-bg-2;
+  padding-top: 100px;
+  justify-content: space-between;
+  @media screen and (max-width: 968px) {
+    flex-direction: column;
+  }
+  &__content {
+    flex: 1;
+    max-width: calc(100% - 320px - 10px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3rem;
+    padding: 0 20px 0 0;
+    
+    @media (max-width: 1024px) {
+      max-width: calc(100% - 280px - 40px);
+      padding: 80px 20px;
+    }
+    
+    @media (max-width: 768px) {
+      max-width: 100%;
+      padding: 80px 16px;
+    }
+    &__decors {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      &__navigation {
+        display: flex;
+        column-gap: 10px;
+        align-items: center;
+        @media screen and (max-width: 968px) {
+          width: 100%;
+          justify-content: space-between;
+        }
+        & span {
+          @include font(2rem, 800);
+          color: $second-text;
+        }
+        & button {
+          padding: 20px;
+          border-radius: 50%;
+          cursor: pointer;
+          background: $main-text-2;
+          & svg {
+            width: 40px;
+            height: 40px;
+            color: $pale-yellow;
+          }
+        }
+      }
+      &__cards {
+        width: 100%;
+        background-color: $main-text-2;
+        border-radius: 20px;
+        display: flex;
+        padding: 1rem 2rem;
+        gap: 10px;
+        overflow-y: auto;
+        @media screen and (max-width: 968px) {
+          flex-direction: column;
+        }
+      }
+    }
+    &__series {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+      &__title {
+        background-color: $main-text-2;
+        border-radius: 20px;
+        padding: 5px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        @media screen and (max-width: 968px) {
+          flex-direction: column;
+        }
+        & h2 {
+          @include font(3rem, 800);
+          color: $main-bg-2;
+        }
+        & span {
+          @include font(1rem, 800);
+          color: $pale-yellow;
+        }
+      }
+    }
+  }
+}
+
+
+.full-calalog__content__banner {
+  width: 100%;
+  border-radius: 20px;
+  background-color: $pale-yellow;
+  display: flex;
+  overflow-x: hidden; // скрываем всё, что за пределами
+  padding: 10px 0;
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.full-calalog__content__banner__track {
+  display: flex;
+  gap: 30px;
+  animation: scrollX 20s linear infinite;
+  white-space: nowrap;
+}
+
+.full-calalog__content__banner__label {
+  min-width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include font(1rem, 800);
+  color: $main-text-2;
+  padding: 0 20px;
+  letter-spacing: 2px;
+}
+
+@keyframes scrollX {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }

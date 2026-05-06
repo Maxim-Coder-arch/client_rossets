@@ -1,87 +1,115 @@
 @use "../../global_styles/colors/colors.scss" as *;
 @use "../../global_styles/mixins/mixins.scss" as *;
 
-.decor-card {
-  flex: 0 1 calc(25% - 24px);
-  min-width: 250px;
-  background-color: $white;
-  border-radius: 20px;
+.vivid-decor-card-wrapper {
+  display: block;
+  width: calc((100% / 2) - 20px);
+  text-decoration: none;
+  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  cursor: pointer;
-  max-width: 250px;
-  
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
   &:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-    
-    .decor-card__link {
-      background-color: $pale-text;
-      color: $white;
+
+    .vivid-decor-card__image {
+      transform: scale(1.06);
+    }
+
+    .vivid-decor-card__arrow {
+      transform: translateX(6px);
     }
   }
-  
+
   @media (max-width: 1024px) {
-    flex: 0 1 calc(33.333% - 24px);
+    width: calc((100% / 3) - 20px);
   }
-  
+
   @media (max-width: 768px) {
-    flex: 0 1 calc(50% - 24px);
+    width: calc((100% / 2) - 16px);
   }
-  
-  @media (max-width: 480px) {
-    flex: 0 1 100%;
-  }
-  
-  &__image {
-    position: relative;
-    aspect-ratio: 1 / 1;
+
+  @media (max-width: 580px) {
     width: 100%;
-    overflow: hidden;
-    background-color: $pale-white-3;
-    
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.4s ease;
+  }
+}
+
+.vivid-decor-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background-color: $main-text-2;
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+
+  &__media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.7);
+    transition: transform 0.35s ease;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: 1;
+  }
+
+  &__info {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    column-gap: 10px;
+    align-items: center;
+
+    @media (max-width: 768px) {
+      padding: 18px;
     }
-    
-    &:hover img {
-      transform: scale(1.05);
+    & svg {
+      color: $main-bg-2;
+      width: 60px;
+      height: 60px;
     }
   }
-  
-  &__content {
-    padding: 20px;
-    text-align: center;
-  }
-  
+
   &__title {
-    @include font(16px, 600);
-    color: $main-text;
-    margin-bottom: 12px;
-    line-height: 1.3;
-    
+    @include font(3rem, 800);
+    color: $pale-yellow;
+    margin: 0;
+    letter-spacing: -0.3px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    line-height: 1.2;
+    flex: 1;
+
     @media (max-width: 768px) {
-      font-size: 14px;
+      font-size: 1.2rem;
     }
   }
-  
-  &__link {
-    display: inline-block;
-    padding: 8px 20px;
-    background-color: transparent;
-    color: $pale-text;
-    border: 1px solid rgba($pale-text, 0.3);
-    border-radius: 30px;
-    @include font(13px, 500);
-    transition: all 0.2s ease;
-    
+
+  &__arrow {
+    width: 30px;
+    height: 30px;
+    color: $pale-yellow;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 12px;
+
     @media (max-width: 768px) {
-      padding: 6px 16px;
-      font-size: 12px;
+      width: 24px;
+      height: 24px;
     }
   }
 }

@@ -1,223 +1,240 @@
 @use "../../../global_styles/colors/colors.scss" as *;
 @use "../../../global_styles/mixins/mixins.scss" as *;
 
+// CONTAINER
 .decor-page {
-  min-height: calc(100vh - 200px);
-  padding: 3rem 2rem;
-  background-color: $white;
-  padding-top: 100px;
+  min-height: 100vh;
+  padding: 120px 30px 80px;
+  background-color: $main-bg-2;
 
   @media (max-width: 768px) {
-    padding: 2rem 1rem;
+    padding: 100px 20px 60px;
+  }
+}
+
+// GRID CARD
+.decor-page__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: 50px;
+  background: $main-text-2;
+  border-radius: 48px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 30px;
   }
 
-  &__loading,
-  &__error {
-    text-align: center;
-    padding: 4rem 2rem;
-    
-    h1 {
-      @include font(24px, 600);
-      color: $main-text;
-      margin-bottom: 1rem;
-    }
-    
-    a {
-      color: $pale-text;
-      text-decoration: none;
-      
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+  @media (max-width: 768px) {
+    padding: 20px;
   }
+}
 
-  &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+// GALLERY
+.decor-page__gallery {
+  &__main {
+    aspect-ratio: 1 / 1;
+    background-color: $main-bg-2;
+    border-radius: 32px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-  }
-
-  // =====================
-  // GALLERY
-  // =====================
-  &__gallery {
-    &__main {
-      aspect-ratio: 1 / 1;
+    img {
       width: 100%;
-      background-color: $pale-white-3;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover img {
+      transform: scale(1.02);
+    }
+  }
+
+  &__thumbs {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+    flex-wrap: wrap;
+
+    &__item {
+      width: 85px;
+      height: 85px;
+      background-color: $main-bg-2;
       border-radius: 20px;
       overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s;
 
       img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
-        padding: 20px;
+        object-fit: cover;
+      }
+
+      &:hover {
+        border-color: $pale-yellow;
+        transform: translateY(-4px);
+      }
+
+      &.active {
+        border-color: $pale-yellow;
+        background-color: rgba($pale-yellow, 0.1);
+      }
+    }
+  }
+}
+
+// INFO
+.decor-page__info {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  &__header {
+    border-left: 6px solid $pale-yellow;
+    padding-left: 20px;
+
+    h1 {
+      @include font(48px, 800);
+      color: $main-bg-2;
+      letter-spacing: -1px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+
+      @media (max-width: 768px) {
+        font-size: 36px;
       }
     }
 
-    &__thumbs {
-      display: flex;
-      gap: 12px;
-      margin-top: 16px;
-      flex-wrap: wrap;
+    span {
+      @include font(40px, 800);
+      color: $pale-yellow;
+      letter-spacing: -0.5px;
+    }
+  }
 
-      &__item {
-        width: 80px;
-        height: 80px;
-        background-color: $pale-white-3;
-        border-radius: 12px;
-        overflow: hidden;
-        cursor: pointer;
-        border: 2px solid transparent;
-        transition: all 0.2s ease;
+  &__description {
+    h2 {
+      @include font(20px, 800);
+      color: $pale-yellow;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
-          padding: 8px;
+    p {
+      @include font(16px, 500);
+      color: rgba($main-bg-2, 0.8);
+      line-height: 1.6;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 24px;
+    }
+  }
+
+  &__fields {
+    h2 {
+      @include font(20px, 700);
+      color: $pale-yellow;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .fields-list {
+      list-style: none;
+      padding: 0;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      overflow: hidden;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 20px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        &:last-child {
+          border-bottom: none;
         }
 
-        &:hover {
-          border-color: rgba($pale-text, 0.5);
+        .field-label {
+          @include font(15px, 600);
+          color: rgba($main-bg-2, 0.6);
         }
 
-        &.active {
-          border-color: $pale-text;
-          box-shadow: 0 0 0 2px rgba($pale-text, 0.2);
+        .field-value {
+          @include font(16px, 700);
+          color: $main-bg-2;
         }
       }
     }
   }
 
-  // =====================
-  // INFO
-  // =====================
-  &__info {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
+  &__actions {
+    margin-top: 20px;
 
-    &__header {
-      border-bottom: 1px solid rgba($pale-text, 0.2);
-      padding-bottom: 20px;
+    .order-button {
+      background: $pale-yellow;
+      border: none;
+      width: 100%;
+      padding: 16px 24px;
+      border-radius: 60px;
+      @include font(18px, 800);
+      color: $main-text-2;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
 
-      h1 {
-        @include font(32px, 700);
-        color: $main-text;
-        margin-bottom: 12px;
-
-        @media (max-width: 768px) {
-          font-size: 28px;
-        }
-      }
-
-      &__price {
-        @include font(28px, 700);
-        color: $pale-text;
-
-        span {
-          @include font(14px, 400);
-          color: $second-text;
-        }
+      &:hover {
+        background: darken($pale-yellow, 10%);
+        transform: scale(1.02);
       }
     }
 
-    &__description {
-      h2 {
-        @include font(18px, 600);
-        color: $main-text;
-        margin-bottom: 12px;
-      }
+    .back-link {
+      display: block;
+      text-align: center;
+      @include font(14px, 500);
+      color: rgba($main-bg-2, 0.5);
+      text-decoration: none;
+      transition: color 0.2s;
 
-      p {
-        @include font(15px, 400);
-        color: $second-text;
-        line-height: 1.6;
-      }
-    }
-
-    &__fields {
-      h2 {
-        @include font(18px, 600);
-        color: $main-text;
-        margin-bottom: 12px;
-      }
-
-      .fields-list {
-        list-style: none;
-        padding: 0;
-        background-color: $pale-white-3;
-        border-radius: 16px;
-        overflow: hidden;
-
-        li {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 12px 16px;
-          border-bottom: 1px solid rgba($pale-text, 0.1);
-
-          &:last-child {
-            border-bottom: none;
-          }
-
-          .field-label {
-            @include font(14px, 500);
-            color: $main-text;
-          }
-
-          .field-value {
-            @include font(14px, 400);
-            color: $pale-text;
-          }
-        }
+      &:hover {
+        color: $pale-yellow;
       }
     }
+  }
+}
 
-    &__actions {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 16px;
+// LOADING & ERROR
+.decor-page__loading,
+.decor-page__error {
+  text-align: center;
+  padding: 80px 20px;
 
-      .order-button {
-        background-color: $pale-text;
-        color: $white;
-        @include font(18px, 600);
-        padding: 14px 24px;
-        border: none;
-        border-radius: 40px;
-        cursor: pointer;
-        transition: all 0.2s ease;
+  h1 {
+    @include font(28px, 800);
+    color: $main-text-2;
+    margin-bottom: 20px;
+  }
 
-        &:hover {
-          background-color: darken($pale-text, 10%);
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba($pale-text, 0.3);
-        }
-      }
+  a {
+    @include font(16px, 600);
+    color: $pale-yellow;
+    text-decoration: none;
 
-      .back-link {
-        text-align: center;
-        @include font(14px, 400);
-        color: $second-text;
-        text-decoration: none;
-        transition: color 0.2s;
-
-        &:hover {
-          color: $pale-text;
-        }
-      }
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
