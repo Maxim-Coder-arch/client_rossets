@@ -45,7 +45,6 @@ const Menu = () => {
         </div>
       </div>
       
-      {/* Основное меню */}
       <div className="menu">
         <div className="menu__logotype">
           Vivid Ribbon

@@ -2,7 +2,6 @@
 
 import TemplateCards from "@/app/share/templateCards/templateCard";
 import LogicUniversalMenu from "@/app/share/universal-menu/logicUniversalMenu";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ISeries } from "@/types/series.type";
 import { IDecor } from "@/types/decor.type";
@@ -12,6 +11,8 @@ import { animate, motion, useMotionValue } from "framer-motion";
 import ArrowLeftIcon from "@/public/icons/arrowLeft";
 import { useMemo } from "react";
 import "./index.scss";
+import  SeriesCardDesign  from "@/app/common/seriesCardDesign/seriesCardDesign";
+import DecorCardDesign from "@/app/common/decorCardDesign/decoreCardDesign";
 
 const dataLogicMenu = [
   {
@@ -33,16 +34,13 @@ const FullCatalog = () => {
   const [sortType, setSortType] = useState<"default" | "newest" | "oldest">("default");
   const [searchQuery, setSearchQuery] = useState("");
   const [showContent, setShowContent] = useState(false);
-  
   const itemsPerPage = 2;
   const seriesPerLoad = 10;
-  
   const start = currentPage * itemsPerPage;
   const end = start + itemsPerPage;
   const visibleDecors = decorsData.slice(start, end);
   const totalPages = Math.ceil(decorsData.length / itemsPerPage);
 
-  // Показываем контент после лоадера
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowContent(true);
@@ -50,7 +48,6 @@ const FullCatalog = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Загрузка серий
   useEffect(() => {
     const fetchSeries = async () => {
       try {
@@ -64,7 +61,6 @@ const FullCatalog = () => {
     fetchSeries();
   }, []);
 
-  // Загрузка декоров
   useEffect(() => {
     const fetchDecors = async () => {
       try {
@@ -78,7 +74,6 @@ const FullCatalog = () => {
     fetchDecors();
   }, []);
 
-  // Функция сортировки
   const getSortedSeries = (data: ISeries[], type: string) => {
     if (!data.length) return [];
     switch (type) {
@@ -95,7 +90,6 @@ const FullCatalog = () => {
     }
   };
 
-  // Фильтрация серий по поиску
   const filteredSeries = useMemo(() => {
     if (!searchQuery.trim()) return seriesData;
     return seriesData.filter(series => 
@@ -130,20 +124,17 @@ const FullCatalog = () => {
     }
   };
 
-  // Догрузка серий
   const loadMore = () => {
     if (seriesLimit < filteredSeries.length) {
       setSeriesLimit(prev => prev + seriesPerLoad);
     }
   };
 
-  // Смена сортировки
   const handleSort = (type: "default" | "newest" | "oldest") => {
     setSortType(type);
     setSeriesLimit(10);
   };
 
-  // Бегущий баннер
   const containerRef = useRef<HTMLDivElement>(null);
   const baseX = useMotionValue(0);
   
@@ -229,7 +220,6 @@ const FullCatalog = () => {
           </motion.div>
           
           <div className="full-calalog__content">
-            {/* Декоры */}
             {!searchQuery.length && (
               <div className="full-calalog__content__decors">
                 <motion.div 
@@ -281,7 +271,6 @@ const FullCatalog = () => {
               </div>
             )}
             
-            {/* Бегущий баннер */}
             <div className="full-calalog__content__banner">
               <motion.div 
                 ref={containerRef}
@@ -304,7 +293,6 @@ const FullCatalog = () => {
               </motion.div>
             </div>
             
-            {/* Серии */}
             <div className="full-calalog__content__series">
               <motion.div 
                 className="full-calalog__content__series__title"
@@ -352,51 +340,6 @@ export default FullCatalog;
 
 
 
-export const SeriesCardDesign = ({ product }: { product: ISeries }) => {
-  return (
-    <Link href={`/pages/series/${product.seriesId}`} className="link-series-card">
-      <div className="series-card-design">
-        <div className="series-card-design__image">
-          <div className="series-card-design__image__wrapper">
-            <Image
-              src={product.image || "/placeholder.jpg"}
-              alt={product.seriesTitle}
-              width={400}
-              height={400}
-            />
-          </div>
-          <span>Серия</span>
-        </div>
-        <div className="series-card-design__series-name">
-          <h3>{product.seriesTitle}</h3>
-          <ArrowRightIcon />
-        </div>
-      </div>
-    </Link>
-  )
-}
 
 
-const DecorCardDesign = ({ product }: { product: IDecor }) => {
-  return (
-    <Link href={`/pages/decor/${product._id}`} className="link-decor-card">
-      <div className="decor-card">
-        <div className="decor-card__image">
-          <div className="decor-card__image__wrapper">
-            <Image
-              src={product.mainImage || "/placeholder.jpg"}
-              alt={product.title}
-              width={400}
-              height={400}
-            />
-          </div>
-          <span>Декор</span>
-        </div>
-        <div className="decor-card__content">
-          <h3>{product.title}</h3>
-          <p>{product.description}</p>
-        </div>
-      </div>
-    </Link>
-  )
-}
+

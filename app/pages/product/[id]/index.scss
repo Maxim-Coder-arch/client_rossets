@@ -238,6 +238,9 @@
       width: auto;
       padding: 10px 30px;
       background-color: $pale-yellow;
+      @media screen and (max-width: 768px) {
+        font-size: 2rem;
+      }
     }
   }
 }

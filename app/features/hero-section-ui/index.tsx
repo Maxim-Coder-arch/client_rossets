@@ -23,7 +23,6 @@ const HeroSectionUi = ({ setIsModalOpen, isModalOpen }: IHeroSetionProps) => {
     <>
       <section id="hero-section" className="hero-split hero-split--light">
         <div className="hero-split__container">
-          {/* Левая колонка — ТЕКСТ */}
           <motion.div 
             className="hero-split__content"
             initial={{ opacity: 0, x: -80 }}
@@ -80,7 +79,6 @@ const HeroSectionUi = ({ setIsModalOpen, isModalOpen }: IHeroSetionProps) => {
             </motion.div>
           </motion.div>
           
-          {/* Правая колонка — КАРТИНКА */}
           <motion.div 
             className="hero-split__image"
             initial={{ opacity: 0, x: 80 }}
@@ -102,7 +100,6 @@ const HeroSectionUi = ({ setIsModalOpen, isModalOpen }: IHeroSetionProps) => {
           </motion.div>
         </div>
         
-        {/* Декоративный элемент — плавный переход к следующей секции */}
         <div className="hero-split__transition"></div>
       </section>
       

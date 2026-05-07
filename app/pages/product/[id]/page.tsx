@@ -10,7 +10,7 @@ import ModalOrderProduct from "@/app/share/modal-order-products/modalOrderProduc
 import { IProduct } from "@/types/product.type";
 import "./index.scss";
 import { ISeries } from "@/types/series.type";
-import { SeriesCardDesign } from "../../full-catalog/page";
+import SeriesCardDesign from "@/app/common/seriesCardDesign/seriesCardDesign";
 
 const ProductPage = () => {
   const params = useParams();

@@ -1,7 +1,6 @@
 @use "../../../global_styles/colors/colors.scss" as *;
 @use "../../../global_styles/mixins/mixins.scss" as *;
 
-// CONTAINER
 .decor-page {
   min-height: 100vh;
   padding: 120px 30px 80px;
@@ -11,8 +10,6 @@
     padding: 100px 20px 60px;
   }
 }
-
-// GRID CARD
 .decor-page__container {
   max-width: 1400px;
   margin: 0 auto;
@@ -35,7 +32,6 @@
   }
 }
 
-// GALLERY
 .decor-page__gallery {
   &__main {
     aspect-ratio: 1 / 1;
@@ -91,7 +87,6 @@
   }
 }
 
-// INFO
 .decor-page__info {
   display: flex;
   flex-direction: column;
@@ -216,7 +211,6 @@
   }
 }
 
-// LOADING & ERROR
 .decor-page__loading,
 .decor-page__error {
   text-align: center;
